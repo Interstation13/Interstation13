@@ -70,9 +70,9 @@
 		chamber_round(0)
 
 /obj/item/gun/ballistic/revolver/can_shoot()
-	return get_ammo(0,0)
+	return get_ammo(FALSE, FALSE)
 
-/obj/item/gun/ballistic/revolver/get_ammo(countchambered = 0, countempties = 1)
+/obj/item/gun/ballistic/revolver/get_ammo(countchambered = FALSE, countempties = TRUE)
 	var/boolets = 0 //mature var names for mature people
 	if (chambered && countchambered)
 		boolets++
@@ -82,7 +82,8 @@
 
 /obj/item/gun/ballistic/revolver/examine(mob/user)
 	..()
-	to_chat(user, "[get_ammo(0,0)] of those are live rounds.")
+	var/live_ammo = get_ammo(FALSE, FALSE)
+	to_chat(user, "[live_ammo ? live_ammo : "None"] of those are live rounds.")
 
 /obj/item/gun/ballistic/revolver/detective
 	name = "\improper .38 Mars Special"
@@ -108,6 +109,8 @@
 	..()
 
 /obj/item/gun/ballistic/revolver/detective/screwdriver_act(mob/living/user, obj/item/I)
+	if(..())
+		return TRUE
 	if(magazine.caliber == "38")
 		to_chat(user, "<span class='notice'>You begin to reinforce the barrel of [src]...</span>")
 		if(magazine.ammo_count())
@@ -151,7 +154,7 @@
 	pin = /obj/item/firing_pin
 
 /obj/item/gun/ballistic/revolver/nagant
-	name = "nagant revolver"
+	name = "\improper Nagant revolver"
 	desc = "An old model of revolver that originated in Russia. Able to be suppressed. Uses 7.62x38mmR ammo."
 	icon_state = "nagant"
 	can_suppress = TRUE
@@ -163,7 +166,7 @@
 // You can spin the chamber to randomize the position of the bullet.
 
 /obj/item/gun/ballistic/revolver/russian
-	name = "\improper russian revolver"
+	name = "\improper Russian revolver"
 	desc = "A Russian-made revolver for drinking games. Uses .357 ammo, and has a mechanism requiring you to spin the chamber before each trigger pull."
 	mag_type = /obj/item/ammo_box/magazine/internal/cylinder/rus357
 	var/spun = FALSE
@@ -191,6 +194,8 @@
 	..()
 
 /obj/item/gun/ballistic/revolver/russian/afterattack(atom/target, mob/living/user, flag, params)
+	. = ..(null, user, flag, params)
+
 	if(flag)
 		if(!(target in user.contents) && ismob(target))
 			if(user.a_intent == INTENT_HARM) // Flogging action
@@ -233,7 +238,7 @@
 	user.visible_message("<span class='danger'>[user.name] fires [src] at [user.p_their()] head!</span>", "<span class='userdanger'>You fire [src] at your head!</span>", "<span class='italics'>You hear a gunshot!</span>")
 
 /obj/item/gun/ballistic/revolver/russian/soul
-	name = "cursed russian revolver"
+	name = "cursed Russian revolver"
 	desc = "To play with this revolver requires wagering your very soul."
 
 /obj/item/gun/ballistic/revolver/russian/soul/shoot_self(mob/living/user)

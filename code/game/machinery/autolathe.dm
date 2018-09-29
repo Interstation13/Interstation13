@@ -31,6 +31,8 @@
 	var/list/datum/design/matching_designs
 	var/selected_category
 	var/screen = 1
+	var/base_price = 25
+	var/hacked_price = 50
 
 	var/list/categories = list(
 							"Tools",
@@ -154,6 +156,7 @@
 
 			var/multiplier = text2num(href_list["multiplier"])
 			var/is_stack = ispath(being_built.build_path, /obj/item/stack)
+			multiplier = CLAMP(multiplier,1,50)
 
 			/////////////////
 
@@ -200,6 +203,7 @@
 	else
 		for(var/i=1, i<=multiplier, i++)
 			var/obj/item/new_item = new being_built.build_path(A)
+			new_item.materials = new_item.materials.Copy()
 			for(var/mat in materials_used)
 				new_item.materials[mat] = materials_used[mat] / multiplier
 			new_item.autolathe_crafted(src)

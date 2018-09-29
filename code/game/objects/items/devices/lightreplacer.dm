@@ -41,7 +41,7 @@
 /obj/item/lightreplacer
 
 	name = "light replacer"
-	desc = "A device to automatically replace lights. Refill with broken or working lightbulbs, or sheets of glass."
+	desc = "A device to automatically replace lights. Refill with broken or working light bulbs, or sheets of glass."
 
 	icon = 'icons/obj/janitor.dmi'
 	icon_state = "lightreplacer0"
@@ -97,7 +97,7 @@
 		if(!user.temporarilyRemoveItemFromInventory(W))
 			return
 		AddUses(round(increment*0.75))
-		to_chat(user, "<span class='notice'>You insert a shard of glass into the [src.name]. You have [uses] light\s remaining.</span>")
+		to_chat(user, "<span class='notice'>You insert a shard of glass into [src]. You have [uses] light\s remaining.</span>")
 		qdel(W)
 		return
 
@@ -112,7 +112,7 @@
 		else
 			if(!user.temporarilyRemoveItemFromInventory(W))
 				return
-			to_chat(user, "<span class='notice'>You insert the [L.name] into the [src.name]</span>")
+			to_chat(user, "<span class='notice'>You insert [L] into [src].</span>")
 			AddShards(1, user)
 			qdel(L)
 		return
@@ -154,6 +154,8 @@
 	Emag()
 
 /obj/item/lightreplacer/attack_self(mob/user)
+	for(var/obj/machinery/light/target in user.loc)
+		ReplaceLight(target, user)
 	to_chat(user, status_string())
 
 /obj/item/lightreplacer/update_icon()
@@ -239,6 +241,7 @@
 		return 0
 
 /obj/item/lightreplacer/afterattack(atom/T, mob/U, proximity)
+	. = ..()
 	if(!proximity)
 		return
 	if(!isturf(T))

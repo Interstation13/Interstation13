@@ -114,6 +114,9 @@ Class Procs:
 	var/obj/item/circuitboard/circuit // Circuit to be created and inserted when the machinery is created
 
 	var/interaction_flags_machine = INTERACT_MACHINE_WIRES_IF_OPEN | INTERACT_MACHINE_ALLOW_SILICON | INTERACT_MACHINE_OPEN_SILICON | INTERACT_MACHINE_SET_MACHINE
+	var/fair_market_price = 69
+	var/market_verb = "Customer"
+	var/payment_department = ACCOUNT_ENG
 
 /obj/machinery/Initialize()
 	if(!armor)
@@ -130,7 +133,7 @@ Class Procs:
 	else
 		START_PROCESSING(SSfastprocess, src)
 	power_change()
-	AddComponent(/datum/component/redirect, list(COMSIG_ENTER_AREA), CALLBACK(src, .proc/power_change))
+	AddComponent(/datum/component/redirect, list(COMSIG_ENTER_AREA = CALLBACK(src, .proc/power_change)))
 
 	if (occupant_typecache)
 		occupant_typecache = typecacheof(occupant_typecache)
@@ -218,11 +221,48 @@ Class Procs:
 	if(panel_open && !(interaction_flags_machine & INTERACT_MACHINE_OPEN))
 		if(!silicon || !(interaction_flags_machine & INTERACT_MACHINE_OPEN_SILICON))
 			return FALSE
-	if(!silicon && (interaction_flags_machine & INTERACT_MACHINE_REQUIRES_SILICON))
-		return FALSE
-	else if(silicon && !(interaction_flags_machine & INTERACT_MACHINE_ALLOW_SILICON))
-		return FALSE
+
+	if(silicon)
+		if(!(interaction_flags_machine & INTERACT_MACHINE_ALLOW_SILICON))
+			return FALSE
+	else
+		if(interaction_flags_machine & INTERACT_MACHINE_REQUIRES_SILICON)
+			return FALSE
+		if(!Adjacent(user))
+			var/mob/living/carbon/H = user
+			if(!(istype(H) && H.has_dna() && H.dna.check_mutation(TK)))
+				return FALSE
 	return TRUE
+
+/obj/machinery/proc/check_nap_violations()
+	if(!SSeconomy.full_ancap)
+		return TRUE
+	if(occupant && !state_open)
+		if(ishuman(occupant))
+			var/mob/living/carbon/human/H = occupant
+			var/obj/item/card/id/I = H.get_idcard()
+			if(I)
+				var/datum/bank_account/insurance = I.registered_account
+				if(!insurance)
+					say("[market_verb] NAP Violation: No bank account found.")
+					nap_violation()
+					return FALSE
+				else
+					if(!insurance.adjust_money(-fair_market_price))
+						say("[market_verb] NAP Violation: Unable to pay.")
+						nap_violation()
+						return FALSE
+					var/datum/bank_account/D = SSeconomy.get_dep_account(payment_department)
+					if(D)
+						D.adjust_money(fair_market_price)
+			else
+				say("[market_verb] NAP Violation: No ID card found.")
+				nap_violation()
+				return FALSE
+	return TRUE
+
+/obj/machinery/proc/nap_violation(mob/violator)
+	return
 
 ////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -231,11 +271,6 @@ Class Procs:
 	if(interaction_flags_machine & INTERACT_MACHINE_SET_MACHINE)
 		user.set_machine(src)
 	. = ..()
-
-/obj/machinery/ui_status(mob/user)
-	if(can_interact(user))
-		return ..()
-	return UI_CLOSE
 
 /obj/machinery/ui_act(action, params)
 	add_fingerprint(usr)
@@ -311,7 +346,7 @@ Class Procs:
 /obj/machinery/proc/spawn_frame(disassembled)
 	var/obj/structure/frame/machine/M = new /obj/structure/frame/machine(loc)
 	. = M
-	M.anchored = anchored
+	M.setAnchored(anchored)
 	if(!disassembled)
 		M.obj_integrity = M.max_integrity * 0.5 //the frame is already half broken
 	transfer_fingerprints_to(M)
@@ -372,7 +407,7 @@ Class Procs:
 		//as long as we're the same anchored state and we're either on a floor or are anchored, toggle our anchored state
 		if(I.use_tool(src, user, time, extra_checks = CALLBACK(src, .proc/unfasten_wrench_check, prev_anchored, user)))
 			to_chat(user, "<span class='notice'>You [anchored ? "un" : ""]secure [src].</span>")
-			anchored = !anchored
+			setAnchored(!anchored)
 			playsound(src, 'sound/items/deconstruct.ogg', 50, 1)
 			return SUCCESSFUL_UNFASTEN
 		return FAILED_UNFASTEN
@@ -414,12 +449,12 @@ Class Procs:
 								var/obj/item/stack/SN = new SB.merge_type(null,used_amt)
 								component_parts += SN
 							else
-								if(W.SendSignal(COMSIG_TRY_STORAGE_TAKE, B, src))
+								if(SEND_SIGNAL(W, COMSIG_TRY_STORAGE_TAKE, B, src))
 									component_parts += B
 									B.moveToNullspace()
-							W.SendSignal(COMSIG_TRY_STORAGE_INSERT, A, null, null, TRUE)
+							SEND_SIGNAL(W, COMSIG_TRY_STORAGE_INSERT, A, null, null, TRUE)
 							component_parts -= A
-							to_chat(user, "<span class='notice'>[A.name] replaced with [B.name].</span>")
+							to_chat(user, "<span class='notice'>[capitalize(A.name)] replaced with [B.name].</span>")
 							shouldplaysound = 1 //Only play the sound when parts are actually replaced!
 							break
 			RefreshParts()

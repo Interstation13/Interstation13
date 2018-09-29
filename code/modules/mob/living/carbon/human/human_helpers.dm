@@ -4,7 +4,7 @@
 
 
 /mob/living/carbon/human/canBeHandcuffed()
-	if(get_num_arms() >= 2)
+	if(get_num_arms(FALSE) >= 2)
 		return TRUE
 	else
 		return FALSE
@@ -147,3 +147,13 @@
 			return FALSE
 
 	return .
+
+/mob/living/carbon/human/proc/get_bank_account()
+	var/datum/bank_account/account
+	var/obj/item/card/id/I = get_idcard()
+
+	if(I && I.registered_account)
+		account = I.registered_account
+		return account
+
+	return FALSE

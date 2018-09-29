@@ -98,6 +98,7 @@ GLOBAL_LIST_INIT(metal_recipes, list ( \
 	resistance_flags = FIRE_PROOF
 	merge_type = /obj/item/stack/sheet/metal
 	grind_results = list("iron" = 20)
+	point_value = 2
 
 /obj/item/stack/sheet/metal/ratvar_act()
 	new /obj/item/stack/tile/brass(loc, amount)
@@ -158,6 +159,7 @@ GLOBAL_LIST_INIT(plasteel_recipes, list ( \
 	resistance_flags = FIRE_PROOF
 	merge_type = /obj/item/stack/sheet/plasteel
 	grind_results = list("iron" = 20, "plasma" = 20)
+	point_value = 23
 
 /obj/item/stack/sheet/plasteel/Initialize(mapload, new_amount, merge = TRUE)
 	recipes = GLOB.plasteel_recipes
@@ -275,6 +277,9 @@ GLOBAL_LIST_INIT(cardboard_recipes, list ( \
 	new/datum/stack_recipe("cardborg suit", /obj/item/clothing/suit/cardborg, 3), \
 	new/datum/stack_recipe("cardborg helmet", /obj/item/clothing/head/cardborg), \
 	new/datum/stack_recipe("pizza box", /obj/item/pizzabox), \
+	new/datum/stack_recipe("donut box", /obj/item/storage/fancy/donut_box), \
+	new/datum/stack_recipe("egg box", /obj/item/storage/fancy/egg_box), \
+	new/datum/stack_recipe("candle box", /obj/item/storage/fancy/candle_box), \
 	new/datum/stack_recipe("folder", /obj/item/folder), \
 	new/datum/stack_recipe("large box", /obj/structure/closet/cardboard, 4), \
 	new/datum/stack_recipe("cardboard cutout", /obj/item/cardboard_cutout, 5), \
@@ -402,6 +407,7 @@ GLOBAL_LIST_INIT(brass_recipes, list ( \
 	turf_type = /turf/open/floor/clockwork
 	novariants = FALSE
 	grind_results = list("iron" = 5, "teslium" = 15)
+	merge_type = /obj/item/stack/tile/brass
 
 /obj/item/stack/tile/brass/narsie_act()
 	new /obj/item/stack/sheet/runed_metal(loc, amount)
@@ -451,6 +457,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	turf_type = /turf/open/floor/bronze
 	novariants = FALSE
 	grind_results = list("iron" = 5, "copper" = 3) //we have no "tin" reagent so this is the closest thing
+	merge_type = /obj/item/stack/tile/bronze
 
 /obj/item/stack/tile/bronze/attack_self(mob/living/user)
 	if(is_servant_of_ratvar(user)) //still lets them build with it, just gives a message
@@ -503,6 +510,7 @@ GLOBAL_LIST_INIT(bronze_recipes, list ( \
 	throw_speed = 1
 	throw_range = 3
 	grind_results = list("carbon" = 10)
+	merge_type = /obj/item/stack/sheet/bone
 
 GLOBAL_LIST_INIT(plastic_recipes, list(
 	new /datum/stack_recipe("plastic flaps", /obj/structure/plasticflaps, 5, one_per_turf = TRUE, on_floor = TRUE, time = 40), \
@@ -542,6 +550,7 @@ new /datum/stack_recipe("paper frame door", /obj/structure/mineral_door/paperfra
 	item_state = "sheet-paper"
 	merge_type = /obj/item/stack/sheet/paperframes
 	resistance_flags = FLAMMABLE
+	merge_type = /obj/item/stack/sheet/paperframes
 
 /obj/item/stack/sheet/paperframes/Initialize()
 	recipes = GLOB.paperframe_recipes

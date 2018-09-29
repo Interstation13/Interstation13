@@ -58,6 +58,7 @@
 		lenin.restricted_roles = restricted_jobs
 
 	if(headrev_candidates.len < required_enemies)
+		setup_error = "Not enough headrev candidates"
 		return FALSE
 
 	return TRUE
@@ -132,7 +133,7 @@
 //Checks if the round is over//
 ///////////////////////////////
 /datum/game_mode/revolution/check_finished()
-	if(CONFIG_GET(keyed_flag_list/continuous)["revolution"])
+	if(CONFIG_GET(keyed_list/continuous)["revolution"])
 		if(finished)
 			SSshuttle.clearHostileEnvironment(src)
 		return ..()

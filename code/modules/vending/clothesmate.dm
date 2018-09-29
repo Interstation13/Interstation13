@@ -35,6 +35,7 @@
 		            /obj/item/clothing/neck/tie/red = 1,
 		            /obj/item/clothing/neck/tie/black = 1,
 		            /obj/item/clothing/neck/tie/horrible = 1,
+		            /obj/item/clothing/neck/scarf/pink = 1,
 		            /obj/item/clothing/neck/scarf/red = 1,
 		            /obj/item/clothing/neck/scarf/green = 1,
 		            /obj/item/clothing/neck/scarf/darkblue = 1,
@@ -114,9 +115,9 @@
 		           /obj/item/clothing/neck/necklace/dope = 3,
 		           /obj/item/clothing/suit/jacket/letterman_nanotrasen = 1)
 	refill_canister = /obj/item/vending_refill/clothing
-
+	default_price = 50
+	extra_price = 75
+	payment_department = NO_FREEBIES
 /obj/item/vending_refill/clothing
 	machine_name = "ClothesMate"
 	icon_state = "refill_clothes"
-	charges = list(37, 4, 4)// of 111 standard, 12 contraband, 10 premium(?)
-	init_charges = list(37, 4, 4)

@@ -345,6 +345,7 @@
 	else if(has_emergency_power(LIGHT_EMERGENCY_POWER_USE) && !turned_off())
 		use_power = IDLE_POWER_USE
 		emergency_mode = TRUE
+		START_PROCESSING(SSmachines, src)
 	else
 		use_power = IDLE_POWER_USE
 		set_light(0)
@@ -361,7 +362,11 @@
 
 
 /obj/machinery/light/process()
-	if(has_power() && cell)
+	if (!cell)
+		return PROCESS_KILL
+	if(has_power())
+		if (cell.charge == cell.maxcharge)
+			return PROCESS_KILL
 		cell.charge = min(cell.maxcharge, cell.charge + LIGHT_EMERGENCY_POWER_USE) //Recharge emergency power automatically while not using it
 	if(emergency_mode && !use_emergency_power(LIGHT_EMERGENCY_POWER_USE))
 		update(FALSE) //Disables emergency mode and sets the color to normal
@@ -585,7 +590,7 @@
 		to_chat(user, "There is no [fitting] in this light.")
 		return
 
-	// make it burn hands if not wearing fire-insulated gloves
+	// make it burn hands unless you're wearing heat insulated gloves or have the RESISTHEAT/RESISTHEATHANDS traits
 	if(on)
 		var/prot = 0
 		var/mob/living/carbon/human/H = user
@@ -599,7 +604,7 @@
 		else
 			prot = 1
 
-		if(prot > 0)
+		if(prot > 0 || user.has_trait(TRAIT_RESISTHEAT) || user.has_trait(TRAIT_RESISTHEATHANDS))
 			to_chat(user, "<span class='notice'>You remove the light [fitting].</span>")
 		else if(istype(user) && user.dna.check_mutation(TK))
 			to_chat(user, "<span class='notice'>You telekinetically remove the light [fitting].</span>")

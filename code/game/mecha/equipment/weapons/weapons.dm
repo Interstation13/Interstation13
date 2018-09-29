@@ -193,7 +193,7 @@
 
 //Base ballistic weapon type
 /obj/item/mecha_parts/mecha_equipment/weapon/ballistic
-	name = "general ballisic weapon"
+	name = "general ballistic weapon"
 	fire_sound = 'sound/weapons/gunshot.ogg'
 	var/projectiles
 	var/projectile_energy_cost
@@ -293,7 +293,7 @@
 	name = "\improper SRM-8 missile rack"
 	desc = "A weapon for combat exosuits. Shoots light explosive missiles."
 	icon_state = "mecha_missilerack"
-	projectile = /obj/item/projectile/bullet/srmrocket
+	projectile = /obj/item/projectile/bullet/a84mm_he
 	fire_sound = 'sound/weapons/grenadelaunch.ogg'
 	projectiles = 8
 	projectile_energy_cost = 1000

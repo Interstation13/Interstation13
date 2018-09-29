@@ -1394,7 +1394,6 @@
 /area/awaymission/caves/BMP_asteroid)
 "ek" = (
 /obj/structure/window{
-	icon_state = "window";
 	dir = 8
 	},
 /mob/living/simple_animal/hostile/mining_drone,
@@ -1440,7 +1439,6 @@
 /area/awaymission/caves/BMP_asteroid)
 "es" = (
 /obj/structure/window{
-	icon_state = "window";
 	dir = 8
 	},
 /obj/structure/window,
@@ -1640,7 +1638,7 @@
 	pixel_y = 32
 	},
 /obj/item/paper/fluff/awaymissions/caves/shipment_notice,
-/obj/item/paper/fluff/awaymissions/caves/saftey_notice,
+/obj/item/paper/fluff/awaymissions/caves/safety_notice,
 /turf/open/floor/plasteel,
 /area/awaymission/caves/listeningpost)
 "fb" = (

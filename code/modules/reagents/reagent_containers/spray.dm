@@ -19,11 +19,13 @@
 	var/stream_range = 1 //the range of tiles the sprayer will reach when in stream mode.
 	var/stream_amount = 10 //the amount of reagents transfered when in stream mode.
 	var/can_fill_from_container = TRUE
+	var/average_reagent_weight = 0 //affects the distance the reagents spray
 	amount_per_transfer_from_this = 5
 	volume = 250
 	possible_transfer_amounts = list(5,10,15,20,25,30,50,100)
 
 /obj/item/reagent_containers/spray/afterattack(atom/A, mob/user)
+	. = ..()
 	if(istype(A, /obj/structure/sink) || istype(A, /obj/structure/janitorialcart) || istype(A, /obj/machinery/hydroponics))
 		return
 
@@ -41,7 +43,7 @@
 		return
 
 	if(reagents.total_volume < amount_per_transfer_from_this)
-		to_chat(user, "<span class='warning'>[src] is empty!</span>")
+		to_chat(user, "<span class='warning'>Not enough left!</span>")
 		return
 
 	spray(A)
@@ -142,6 +144,18 @@
 		reagents.reaction(usr.loc)
 		src.reagents.clear_reagents()
 
+/obj/item/reagent_containers/spray/on_reagent_change(changetype)
+	var/total_reagent_weight
+	var/amount_of_reagents
+	for (var/datum/reagent/R in reagents.reagent_list)
+		total_reagent_weight = total_reagent_weight + R.reagent_weight
+		amount_of_reagents++
+
+	average_reagent_weight = total_reagent_weight / amount_of_reagents
+	spray_range = CLAMP(round((initial(spray_range) / average_reagent_weight) - ((amount_of_reagents - 1) * 1)), 3, 5) //spray distance between 3 and 5 tiles rounded down; extra reagents lose a tile
+	if(stream_mode == 0)
+		current_range = spray_range
+
 //space cleaner
 /obj/item/reagent_containers/spray/cleaner
 	name = "space cleaner"
@@ -187,6 +201,9 @@
 	amount_per_transfer_from_this = 5
 	list_reagents = list("condensedcapsaicin" = 40)
 
+/obj/item/reagent_containers/spray/pepper/empty //for protolathe printing
+	list_reagents = null
+
 /obj/item/reagent_containers/spray/pepper/suicide_act(mob/living/carbon/user)
 	user.visible_message("<span class='suicide'>[user] begins huffing \the [src]! It looks like [user.p_theyre()] getting a dirty high!</span>")
 	return OXYLOSS
@@ -195,7 +212,7 @@
 /obj/item/reagent_containers/spray/pepper/afterattack(atom/A as mob|obj, mob/user)
 	if (A.loc == user)
 		return
-	..()
+	. = ..()
 
 //water flower
 /obj/item/reagent_containers/spray/waterflower
@@ -273,7 +290,7 @@
 	// Make it so the bioterror spray doesn't spray yourself when you click your inventory items
 	if (A.loc == user)
 		return
-	..()
+	. = ..()
 
 /obj/item/reagent_containers/spray/chemsprayer/spray(atom/A)
 	var/direction = get_dir(src, A)

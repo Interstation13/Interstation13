@@ -72,7 +72,7 @@
 	if(prob(20))
 		if(carbon_owner)
 			carbon_owner.handle_dreams()
-		if(prob(10) && owner.health > HEALTH_THRESHOLD_CRIT)
+		if(prob(10) && owner.health > owner.crit_threshold)
 			owner.emote("snore")
 
 /obj/screen/alert/status_effect/asleep
@@ -124,7 +124,7 @@
 		qdel(src)
 
 /datum/status_effect/belligerent/proc/do_movement_toggle(force_damage)
-	var/number_legs = owner.get_num_legs()
+	var/number_legs = owner.get_num_legs(FALSE)
 	if(iscarbon(owner) && !is_servant_of_ratvar(owner) && !owner.anti_magic_check() && number_legs)
 		if(force_damage || owner.m_intent != MOVE_INTENT_WALK)
 			if(GLOB.ratvar_awakens)
@@ -224,7 +224,7 @@
 			if(is_eligible_servant(owner))
 				to_chat(owner, "<span class='sevtug[span_part]'>\"[text2ratvar("You are mine and his, now.")]\"</span>")
 				if(add_servant_of_ratvar(owner))
-					owner.log_message("<font color=#BE8700>Conversion was done with a Mania Motor.</font>", INDIVIDUAL_ATTACK_LOG)
+					owner.log_message("conversion was done with a Mania Motor", LOG_ATTACK, color="#BE8700")
 			owner.Unconscious(100)
 		else
 			if(prob(severity * 0.15))
@@ -468,7 +468,7 @@
 	var/health_difference = old_health - owner.health
 	if(!health_difference)
 		return
-	owner.visible_message("<span class='warning'>The light in [owner]'s eyes dims as they're harmed!</span>", \
+	owner.visible_message("<span class='warning'>The light in [owner]'s eyes dims as [owner.p_theyre()] harmed!</span>", \
 	"<span class='boldannounce'>The dazzling lights dim as you're harmed!</span>")
 	health_difference *= 2 //so 10 health difference translates to 20 deciseconds of stun reduction
 	duration -= health_difference
@@ -507,3 +507,69 @@
 	desc = "Your body is covered in blue ichor! You can't be revived by vitality matrices."
 	icon_state = "ichorial_stain"
 	alerttooltipstyle = "clockcult"
+
+/datum/status_effect/gonbolaPacify
+	id = "gonbolaPacify"
+	status_type = STATUS_EFFECT_MULTIPLE
+	tick_interval = -1
+	alert_type = null
+
+/datum/status_effect/gonbolaPacify/on_apply()
+	owner.add_trait(TRAIT_PACIFISM, "gonbolaPacify")
+	owner.add_trait(TRAIT_MUTE, "gonbolaMute")
+	owner.add_trait(TRAIT_JOLLY, "gonbolaJolly")
+	to_chat(owner, "<span class='notice'>You suddenly feel at peace and feel no need to make any sudden or rash actions...</span>")
+	return ..()
+
+/datum/status_effect/gonbolaPacify/on_remove()
+	owner.remove_trait(TRAIT_PACIFISM, "gonbolaPacify")
+	owner.remove_trait(TRAIT_MUTE, "gonbolaMute")
+	owner.remove_trait(TRAIT_JOLLY, "gonbolaJolly")
+
+/datum/status_effect/trance
+	id = "trance"
+	status_type = STATUS_EFFECT_UNIQUE
+	duration = 300
+	tick_interval = 10
+	examine_text = "<span class='warning'>SUBJECTPRONOUN seems slow and unfocused.</span>"
+	var/stun = TRUE
+
+/datum/status_effect/trance/tick()
+	if(stun)
+		owner.Stun(60, TRUE, TRUE)
+	owner.dizziness = 20
+
+/datum/status_effect/trance/on_apply()
+	if(!iscarbon(owner))
+		return FALSE
+	RegisterSignal(owner, COMSIG_MOVABLE_HEAR, .proc/hypnotize)
+	owner.add_trait(TRAIT_MUTE, "trance")
+	if(!owner.has_quirk(/datum/quirk/monochromatic))
+		owner.add_client_colour(/datum/client_colour/monochrome)
+	owner.visible_message("[stun ? "<span class='warning'>[owner] stands still as [owner.p_their()] eyes seem to focus on a distant point.</span>" : ""]", \
+	"<span class='warning'>[pick("You feel your thoughts slow down...", "You suddenly feel extremely dizzy...", "You feel like you're in the middle of a dream...","You feel incredibly relaxed...")]</span>")
+	return TRUE
+
+/datum/status_effect/trance/on_creation(mob/living/new_owner, _duration, _stun = TRUE)
+	duration = _duration
+	stun = _stun
+	. = ..()
+
+/datum/status_effect/trance/on_remove()
+	UnregisterSignal(owner, COMSIG_MOVABLE_HEAR)
+	owner.remove_trait(TRAIT_MUTE, "trance")
+	owner.dizziness = 0
+	if(!owner.has_quirk(/datum/quirk/monochromatic))
+		owner.remove_client_colour(/datum/client_colour/monochrome)
+	to_chat(owner, "<span class='warning'>You snap out of your trance!</span>")
+
+/datum/status_effect/trance/proc/hypnotize(datum/source, message, atom/movable/speaker, message_language, raw_message, radio_freq, list/spans, message_mode)
+	if(!owner.can_hear())
+		return
+	if(speaker == owner)
+		return
+	var/mob/living/carbon/C = owner
+	C.cure_trauma_type(/datum/brain_trauma/hypnosis, TRAUMA_RESILIENCE_SURGERY) //clear previous hypnosis
+	addtimer(CALLBACK(C, /mob/living/carbon.proc/gain_trauma, /datum/brain_trauma/hypnosis, TRAUMA_RESILIENCE_SURGERY, raw_message), 10)
+	addtimer(CALLBACK(C, /mob/living.proc/Stun, 60, TRUE, TRUE), 15) //Take some time to think about it
+	qdel(src)

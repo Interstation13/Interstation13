@@ -12,7 +12,7 @@ Charged extracts:
 	icon_state = "charged"
 
 /obj/item/slimecross/charged/Initialize()
-	..()
+	. = ..()
 	create_reagents(10)
 
 /obj/item/slimecross/charged/attack_self(mob/user)
@@ -196,7 +196,7 @@ Charged extracts:
 
 /obj/item/slimecross/charged/gold/Destroy()
 	STOP_PROCESSING(SSobj, src)
-	..()
+	return ..()
 
 /obj/item/slimecross/charged/oil
 	colour = "oil"
@@ -315,7 +315,7 @@ Charged extracts:
 	var/uses = 2
 
 /obj/item/slimepotion/spaceproof/afterattack(obj/item/clothing/C, mob/user, proximity)
-	..()
+	. = ..()
 	if(!uses)
 		qdel(src)
 		return
@@ -349,10 +349,11 @@ Charged extracts:
 	desc = "A strange, reddish goo said to repel lava as if it were water, without reducing flammability. Has two uses."
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "potred"
+	resistance_flags = LAVA_PROOF | FIRE_PROOF
 	var/uses = 2
 
 /obj/item/slimepotion/lavaproof/afterattack(obj/item/C, mob/user, proximity)
-	..()
+	. = ..()
 	if(!uses)
 		qdel(src)
 		return ..()

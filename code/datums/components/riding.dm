@@ -22,15 +22,15 @@
 /datum/component/riding/Initialize()
 	if(!ismovableatom(parent))
 		return COMPONENT_INCOMPATIBLE
-	RegisterSignal(COMSIG_MOVABLE_BUCKLE, .proc/vehicle_mob_buckle)
-	RegisterSignal(COMSIG_MOVABLE_UNBUCKLE, .proc/vehicle_mob_unbuckle)
-	RegisterSignal(COMSIG_MOVABLE_MOVED, .proc/vehicle_moved)
+	RegisterSignal(parent, COMSIG_MOVABLE_BUCKLE, .proc/vehicle_mob_buckle)
+	RegisterSignal(parent, COMSIG_MOVABLE_UNBUCKLE, .proc/vehicle_mob_unbuckle)
+	RegisterSignal(parent, COMSIG_MOVABLE_MOVED, .proc/vehicle_moved)
 
-/datum/component/riding/proc/vehicle_mob_unbuckle(mob/living/M, force = FALSE)
+/datum/component/riding/proc/vehicle_mob_unbuckle(datum/source, mob/living/M, force = FALSE)
 	restore_position(M)
 	unequip_buckle_inhands(M)
 
-/datum/component/riding/proc/vehicle_mob_buckle(mob/living/M, force = FALSE)
+/datum/component/riding/proc/vehicle_mob_buckle(datum/source, mob/living/M, force = FALSE)
 	handle_vehicle_offsets()
 
 /datum/component/riding/proc/handle_vehicle_layer()
@@ -46,7 +46,7 @@
 /datum/component/riding/proc/set_vehicle_dir_layer(dir, layer)
 	directional_vehicle_layers["[dir]"] = layer
 
-/datum/component/riding/proc/vehicle_moved()
+/datum/component/riding/proc/vehicle_moved(datum/source)
 	var/atom/movable/AM = parent
 	for(var/i in AM.buckled_mobs)
 		ride_check(i)
@@ -193,7 +193,7 @@
 
 /datum/component/riding/human/Initialize()
 	. = ..()
-	RegisterSignal(COMSIG_HUMAN_MELEE_UNARMED_ATTACK, .proc/on_host_unarmed_melee)
+	RegisterSignal(parent, COMSIG_HUMAN_MELEE_UNARMED_ATTACK, .proc/on_host_unarmed_melee)
 
 /datum/component/riding/human/proc/on_host_unarmed_melee(atom/target)
 	var/mob/living/carbon/human/AM = parent
