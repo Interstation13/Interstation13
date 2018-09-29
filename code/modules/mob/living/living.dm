@@ -401,6 +401,7 @@
 			for(var/S in mind.spell_list)
 				var/obj/effect/proc_holder/spell/spell = S
 				spell.updateButtonIcon()
+	unlock_achievement(new/datum/achievement/revived())
 
 //proc used to completely heal a mob.
 /mob/living/proc/fully_heal(admin_revive = 0)

@@ -1032,6 +1032,8 @@
 #include "code\game\turfs\simulated\wall\reinf_walls.dm"
 #include "code\game\turfs\space\space.dm"
 #include "code\game\turfs\space\transit.dm"
+#include "code\modules\achievements\_achievements_core.dm"
+#include "code\modules\achievements\achievements.dm"
 #include "code\modules\admin\admin.dm"
 #include "code\modules\admin\admin_investigate.dm"
 #include "code\modules\admin\admin_ranks.dm"

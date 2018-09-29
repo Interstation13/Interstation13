@@ -547,6 +547,7 @@
 
 	if(changelingwin)
 		parts += "<span class='greentext'>The changeling was successful!</span>"
+		owner.current.unlock_achievement(new/datum/achievement/winner())
 	else
 		parts += "<span class='redtext'>The changeling has failed.</span>"
 

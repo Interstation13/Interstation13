@@ -59,6 +59,7 @@
 
 	if(win)
 		result += "<span class='greentext'>The [special_role_text] was successful!</span>"
+		owner.current.unlock_achievement(new/datum/achievement/winner())
 	else
 		result += "<span class='redtext'>The [special_role_text] has failed!</span>"
 

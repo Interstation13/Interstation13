@@ -17,12 +17,13 @@
 /datum/antagonist/traitor/on_gain()
 	if(owner.current && isAI(owner.current))
 		traitor_kind = TRAITOR_AI
-	
+
 	SSticker.mode.traitors += owner
 	owner.special_role = special_role
 	if(give_objectives)
 		forge_traitor_objectives()
 	finalize_traitor()
+	owner.current.unlock_achievement(new/datum/achievement/traitor())
 	..()
 
 /datum/antagonist/traitor/apply_innate_effects()
@@ -47,7 +48,7 @@
 		A.verbs -= /mob/living/silicon/ai/proc/choose_modules
 		A.malf_picker.remove_malf_verbs(A)
 		qdel(A.malf_picker)
-	
+
 	SSticker.mode.traitors -= owner
 	if(!silent && owner.current)
 		to_chat(owner.current,"<span class='userdanger'> You are no longer the [special_role]! </span>")
@@ -348,6 +349,7 @@
 
 	if(traitorwin)
 		result += "<span class='greentext'>The [special_role_text] was successful!</span>"
+		owner.current.unlock_achievement(new/datum/achievement/winner())
 	else
 		result += "<span class='redtext'>The [special_role_text] has failed!</span>"
 		SEND_SOUND(owner.current, 'sound/ambience/ambifailure.ogg')

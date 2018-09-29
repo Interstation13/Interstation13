@@ -140,6 +140,7 @@ GLOBAL_LIST_EMPTY(antagonists)
 
 	if(owner.objectives.len == 0 || objectives_complete)
 		report += "<span class='greentext big'>The [name] was successful!</span>"
+		owner.current.unlock_achievement(new/datum/achievement/winner())
 	else
 		report += "<span class='redtext big'>The [name] has failed!</span>"
 

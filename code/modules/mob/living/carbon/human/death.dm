@@ -40,6 +40,7 @@
 		SSblackbox.ReportDeath(src)
 	if(is_devil(src))
 		INVOKE_ASYNC(is_devil(src), /datum/antagonist/devil.proc/beginResurrectionCheck, src)
+	unlock_achievement(new/datum/achievement/dead())
 
 /mob/living/carbon/human/proc/makeSkeleton()
 	add_trait(TRAIT_DISFIGURED, TRAIT_GENERIC)

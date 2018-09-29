@@ -45,8 +45,11 @@
 
 		client.change_view(CONFIG_GET(string/default_view)) // Resets the client.view in case it was changed.
 
+		var/savefile/F = new /savefile("data/player_saves/[copytext(ckey, 1, 2)]/[ckey]/achievements.sav")
+		client.achievement_holder.Read(F)
+
 		if(client.player_details.player_actions.len)
 			for(var/datum/action/A in client.player_details.player_actions)
 				A.Grant(src)
-
+		
 	log_message("Client [key_name(src)] has taken ownership of mob [src]", INDIVIDUAL_OWNERSHIP_LOG)
