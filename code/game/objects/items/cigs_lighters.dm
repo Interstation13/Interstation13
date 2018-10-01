@@ -755,7 +755,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 		else
 			to_chat(user, "<span class='warning'>[src] can't hold anymore reagents!</span>")
 
-	if(istype(O, /obj/item/screwdriver))
+	if(O.tool_behaviour == TOOL_SCREWDRIVER)
 		if(!screw)
 			screw = 1
 			to_chat(user, "<span class='notice'>You open the cap on [src].</span>")
@@ -768,7 +768,7 @@ CIGARETTE PACKETS ARE IN FANCY.DM
 			to_chat(user, "<span class='notice'>You close the cap on [src].</span>")
 			cut_overlays()
 
-	if(istype(O, /obj/item/multitool))
+	if(O.tool_behaviour == TOOL_MULTITOOL)
 		if(screw && !(obj_flags & EMAGGED))//also kinky
 			if(!super)
 				cut_overlays()
