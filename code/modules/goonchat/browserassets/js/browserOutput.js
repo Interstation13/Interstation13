@@ -363,6 +363,8 @@ function output(message, flag) {
 					"font-size": "0.7em"
 				}, 100);
 			});
+			if(parseInt(lastmessages.css("font-size")) < 24) //Completely arbitrary max size
+				lastmessages.css("font-size","+=2")
 			opts.messageCount--;
 			handled = true;
 		}
