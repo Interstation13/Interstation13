@@ -39,3 +39,20 @@
 	description = "Actually manage to complete all your traitor objectives."
 	difficulty = DIFF_HARD
 	announced = TRUE
+
+/datum/achievement/pissed
+	name = "Pissed"
+	description = "Sometimes you just can't hold it."
+
+/datum/achievement/shit_pants
+	name = "The Brown Note"
+	description = "Ha ha! Poop is funny!"
+
+/datum/achievement/shit_on
+	name = "Unrobust"
+	description = "Get shitted on."
+	announced = TRUE
+
+/datum/achievement/poo_eaten
+	name = "Eat Da Poo Poo"
+	description = "Discusting!"

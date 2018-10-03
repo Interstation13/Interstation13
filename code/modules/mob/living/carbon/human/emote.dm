@@ -147,3 +147,22 @@
 		T.Entered(src)
 
 //Ayy lmao
+
+
+//Shitty emotes
+/datum/emote/living/carbon/human/poo
+	key = "poo"
+
+/datum/emote/living/carbon/human/poo/run_emote(mob/user, params)
+	var/mob/living/carbon/human/H = user
+	H.handle_shit()
+
+/datum/emote/living/carbon/human/pee
+	key = "pee"
+
+/datum/emote/living/carbon/human/pee/run_emote(mob/user, params)
+	var/mob/living/carbon/human/H = user
+	H.handle_piss()
+
+
+/datum/emote/living/carbon/human/

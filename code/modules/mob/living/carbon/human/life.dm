@@ -47,6 +47,9 @@
 	if(stat != DEAD)
 		return 1
 
+/mob/living/carbon/human/handle_stomach()
+	..()
+	handle_excrement()
 
 /mob/living/carbon/human/calculate_affecting_pressure(pressure)
 	if (wear_suit && head && istype(wear_suit, /obj/item/clothing) && istype(head, /obj/item/clothing))

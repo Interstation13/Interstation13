@@ -63,6 +63,20 @@
 	if(user.reagents && (user.reagents.get_reagent("menthol") || user.reagents.get_reagent("peppermint_patty")))
 		return FALSE
 
+/datum/emote/living/cough/run_emote(mob/user, params)
+	. = ..()
+	if(. && ishuman(user))
+		var/emotesound = null
+		if(user.gender == MALE)
+			emotesound = "sound/voice/emotes/male_cough[rand(1,4)].ogg"
+
+		else
+			emotesound = "sound/voice/emotes/female_cough[rand(1,6)].ogg"
+
+		if(emotesound)
+			playsound(user, emotesound, 50, 0, 1)
+
+
 /datum/emote/living/dance
 	key = "dance"
 	key_third_person = "dances"
@@ -261,6 +275,19 @@
 	message = "screams."
 	message_mime = "acts out a scream!"
 	emote_type = EMOTE_AUDIBLE
+
+/datum/emote/living/scream/run_emote(mob/user, params)
+	. = ..()
+	if(. && ishuman(user))
+		var/emotesound = null
+		if(user.gender == MALE)
+			emotesound = "sound/voice/emotes/male_scream[rand(1,2)].ogg"
+
+		else
+			emotesound = "sound/voice/emotes/female_scream[rand(1,2)].ogg"
+
+		if(emotesound)
+			playsound(user, emotesound, 50, 0, 1)
 
 /datum/emote/living/scowl
 	key = "scowl"
