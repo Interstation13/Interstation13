@@ -320,7 +320,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	var/obj/item/card/id/C
 	if(ishuman(user))
 		H = user
-		C = H.get_idcard()
+		C = H.get_idcard(TRUE)
 
 	if(!C)
 		dat += "<font color = 'red'><h3>No ID Card detected!</h3></font>"
@@ -342,12 +342,12 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			var/is_hidden = hidden_records.Find(R)
 			if(is_hidden && !extended_inventory)
 				continue
-			if(coin_records.Find(R) || is_hidden)
-				price_listed = "$[extra_price]"
 			if(R.custom_price)
 				price_listed = "$[R.custom_price]"
 			if(!onstation || account && account.account_job && account.account_job.paycheck_department == payment_department)
 				price_listed = "FREE"
+			if(coin_records.Find(R) || is_hidden)
+				price_listed = "$[extra_price]"
 			dat += "<li>"
 			if(R.amount > 0 && ((C && C.registered_account && onstation) || (!onstation && iscarbon(user))))
 				dat += "<a href='byond://?src=[REF(src)];vend=[REF(R)]'>Vend</a> "
@@ -457,7 +457,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 		vend_ready = 0
 		if(ishuman(usr) && onstation)
 			var/mob/living/carbon/human/H = usr
-			var/obj/item/card/id/C = H.get_idcard()
+			var/obj/item/card/id/C = H.get_idcard(TRUE)
 
 			if(!C)
 				say("No card found.")
@@ -502,8 +502,6 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			vend_ready = 1
 			return
 		var/price_to_use = default_price
-		if(R in coin_records || R in hidden_records)
-			price_to_use = extra_price
 		if(R.custom_price)
 			price_to_use = R.custom_price
 		if(R in hidden_records)
@@ -522,7 +520,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			return
 		if(onstation && ishuman(usr))
 			var/mob/living/carbon/human/H = usr
-			var/obj/item/card/id/C = H.get_idcard()
+			var/obj/item/card/id/C = H.get_idcard(TRUE)
 
 			if(!C)
 				say("No card found.")
@@ -537,6 +535,8 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			var/datum/bank_account/account = C.registered_account
 			if(account.account_job && account.account_job.paycheck_department == payment_department)
 				price_to_use = 0
+			if(coin_records.Find(R) || hidden_records.Find(R))
+				price_to_use = extra_price
 			if(price_to_use && !account.adjust_money(-price_to_use))
 				say("You do not possess the funds to purchase [R.name].")
 				flick(icon_deny,src)
