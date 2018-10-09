@@ -24,7 +24,8 @@
 	var/dried = 0
 
 
-/obj/effect/decal/cleanable/poo/New()
+/obj/effect/decal/cleanable/poo/Initialize()
+	. = ..()
 	icon = 'icons/effects/pooeffect.dmi'
 	icon_state = pick(src.random_icon_states)
 	for(var/obj/effect/decal/cleanable/poo/shit in src.loc)
@@ -78,8 +79,8 @@
 		if((!dried) && prob(5))
 			M.slip("urine")
 
-/obj/effect/decal/cleanable/urine/New()
-	..()
+/obj/effect/decal/cleanable/urine/Initialize()
+	. = ..()
 	icon_state = pick(random_icon_states)
 	reagents.add_reagent(/datum/reagent/urine,5)
 	for(var/obj/effect/decal/cleanable/urine/piss in src.loc)
@@ -140,8 +141,8 @@
 	icon_state = "poop2"
 	item_state = "poop"
 
-/obj/item/reagent_containers/food/snacks/poo/New()
-	..()
+/obj/item/reagent_containers/food/snacks/poo/Initialize()
+	. = ..()
 	icon_state = pick("poop1", "poop2", "poop3", "poop4", "poop5", "poop6", "poop7")
 	reagents.add_reagent("poo", 10)
 	bitesize = 3
@@ -163,9 +164,9 @@
 	icon = 'icons/obj/chemical.dmi'
 	icon_state = "bottle15"
 
-	New()
-		..()
-		reagents.add_reagent("urine", 30)
+/obj/item/reagent_containers/glass/bottle/urine/Initialize()
+	. = ..()
+	reagents.add_reagent("urine", 30)
 
 
 //#####LIFE PROCS#####
