@@ -98,7 +98,10 @@
 	update_icon()
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-/obj/item/gun/ballistic/attack_hand(mob/user)
+///obj/item/gun/ballistic/attack_hand(mob/user)
+
+
+/obj/item/gun/ballistic/proc/remove_surpressor(mob/user)
 	if(loc == user)
 		if(suppressed && can_unsuppress)
 			var/obj/item/suppressor/S = suppressed
@@ -112,7 +115,11 @@
 			return
 	return ..()
 
-/obj/item/gun/ballistic/attack_self(mob/living/user)
+/obj/item/gun/ballistic/attack_self(mob/user)
+	remove_surpressor(user)
+	return
+
+/obj/item/gun/ballistic/proc/unload_ammo(mob/living/user)
 	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(magazine)
 		magazine.forceMove(drop_location())
@@ -134,6 +141,19 @@
 		to_chat(user, "<span class='notice'>There's no magazine in \the [src].</span>")
 	update_icon()
 	return
+
+/obj/item/gun/ballistic/MouseDrop(var/obj/over_object)
+	if (!over_object || !(ishuman(usr)))
+		return
+
+	if (!(src.loc == usr))
+		return
+
+	switch(over_object.name)
+		if("right hand")
+			unload_ammo(usr)
+		if("left hand")
+			unload_ammo(usr)
 
 
 /obj/item/gun/ballistic/examine(mob/user)
