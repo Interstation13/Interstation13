@@ -102,7 +102,9 @@
 						"Leopard Spots" = "detective_leopard",
 						"Black Panther" = "detective_panther",
 						"Gold Trim" = "detective_gold",
-						"The Peacemaker" = "detective_peacemaker"
+						"The Peacemaker" = "detective_peacemaker",
+						"Snubbed" = "detective_snub",
+						"Bluesilver" = "detective_bluesilver"
 						)
 
 /obj/item/gun/ballistic/revolver/detective/process_fire(atom/target, mob/living/user, message = TRUE, params = null, zone_override = "", bonus_spread = 0)
