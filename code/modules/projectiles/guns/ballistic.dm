@@ -120,6 +120,11 @@
 	return
 
 /obj/item/gun/ballistic/proc/unload_ammo(mob/living/user)
+	if(istype(src,/obj/item/gun/ballistic/revolver))//Fuck internal magazines tbh fam.
+		return
+	if(istype(src,/obj/item/gun/ballistic/shotgun))
+		return
+
 	var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(magazine)
 		magazine.forceMove(drop_location())
