@@ -39,6 +39,9 @@
 		//Stuff jammed in your limbs hurts
 		handle_embedded_objects()
 
+	if(stat != DEAD)
+		handle_hygiene()
+
 	//Update our name based on whether our face is obscured/disfigured
 	name = get_visible_name()
 
@@ -330,8 +333,40 @@
 	if(istype(wear_mask, /obj/item/clothing/mask/gas))
 		var/mask_sound = pick('sound/effects/gasmask1.ogg','sound/effects/gasmask2.ogg','sound/effects/gasmask3.ogg','sound/effects/gasmask4.ogg','sound/effects/gasmask5.ogg','sound/effects/gasmask6.ogg','sound/effects/gasmask7.ogg','sound/effects/gasmask8.ogg','sound/effects/gasmask9.ogg','sound/effects/gasmask10.ogg')
 		playsound(src, mask_sound, 50, 1)
+/mob/living/carbon/human/proc/handle_hygiene()
+	if(has_trait(TRAIT_ALWAYS_CLEAN))
+		set_hygiene(HYGIENE_LEVEL_CLEAN)
+		return
 
+	var/hygiene_loss = -HYGIENE_FACTOR
 
+	//If you're covered in blood, you'll start smelling like shit faster.
+	var/obj/item/head = get_item_by_slot(SLOT_HEAD)
+	if(head)
+		IF_HAS_BLOOD_DNA(head)
+			hygiene_loss -= 2 * HYGIENE_FACTOR
+
+	var/obj/item/mask = get_item_by_slot(SLOT_HEAD)
+	if(mask)
+		IF_HAS_BLOOD_DNA(mask)
+			hygiene_loss -= 2 * HYGIENE_FACTOR
+
+	var/obj/item/uniform = get_item_by_slot(SLOT_W_UNIFORM)
+	if(uniform)
+		IF_HAS_BLOOD_DNA(uniform)
+			hygiene_loss -= 4 * HYGIENE_FACTOR
+
+	var/obj/item/suit = get_item_by_slot(SLOT_WEAR_SUIT)
+	if(suit)
+		IF_HAS_BLOOD_DNA(suit)
+			hygiene_loss -= 3 * HYGIENE_FACTOR
+
+	var/obj/item/feet = get_item_by_slot(SLOT_SHOES)
+	if(feet)
+		IF_HAS_BLOOD_DNA(feet)
+			hygiene_loss -= 2 * HYGIENE_FACTOR
+
+	adjust_hygiene(hygiene_loss)
 
 
 #undef THERMAL_PROTECTION_HEAD
