@@ -906,12 +906,14 @@
 /mob/living/simple_animal/parrot/Poly/death(gibbed)
 	if(!memory_saved)
 		Write_Memory(TRUE)
+	/* //Fuck you poly's ghost. If I kill you Poly you should fucking stay dead.
 	if(rounds_survived == longest_survival || rounds_survived == longest_deathstreak || prob(0.666))
 		var/mob/living/simple_animal/parrot/Poly/ghost/G = new(loc)
 		if(mind)
 			mind.transfer_to(G)
 		else
 			G.key = key
+	*/
 	..(gibbed)
 
 /mob/living/simple_animal/parrot/Poly/proc/Read_Memory()
