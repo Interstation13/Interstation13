@@ -18,7 +18,7 @@
 	var/mob/living/LM = parent
 	var/v = volume
 	var/e = e_range
-	if(!T.footstep || LM.buckled || !CHECK_MULTIPLE_BITFIELDS(LM.mobility_flags, MOBILITY_STAND | MOBILITY_MOVE) || LM.throwing || LM.movement_type & (VENTCRAWLING | FLYING))
+	if(!T.footstep || LM.buckled || LM.lying || !CHECK_MULTIPLE_BITFIELDS(LM.mobility_flags, MOBILITY_STAND | MOBILITY_MOVE) || LM.throwing || LM.movement_type & (VENTCRAWLING | FLYING))
 		return
 	
 	if(iscarbon(LM))
