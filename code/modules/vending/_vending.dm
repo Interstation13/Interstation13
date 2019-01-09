@@ -25,6 +25,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	var/max_amount = 0
 	var/display_color = "blue"
 	var/custom_price
+	var/custom_premium_price
 
 /obj/machinery/vending
 	name = "\improper Vendomat"
@@ -62,7 +63,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	var/slogan_delay = 6000		//How long until we can pitch again?
 	var/icon_vend				//Icon_state when vending!
 	var/icon_deny				//Icon_state when vending!
-	var/seconds_electrified = 0	//Shock customers like an airlock.
+	var/seconds_electrified = MACHINE_NOT_ELECTRIFIED	//Shock customers like an airlock.
 	var/shoot_inventory = 0		//Fire items at customers! We're broken!
 	var/shoot_inventory_chance = 2
 	var/shut_up = 0				//Stop spouting those godawful pitches!
@@ -73,12 +74,16 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	var/chef_price = 10
 	var/default_price = 25
 	var/extra_price = 50
+	var/onstation = TRUE //if it doesn't originate from off-station during mapload, everything is free
 
 	var/dish_quants = list()  //used by the snack machine's custom compartment to count dishes.
 
 	var/obj/item/vending_refill/refill_canister = null		//The type of refill canisters used by this machine.
 
-/obj/machinery/vending/Initialize()
+/obj/item/circuitboard
+	var/onstation = TRUE //if the circuit board originated from a vendor off station or not.
+
+/obj/machinery/vending/Initialize(mapload)
 	var/build_inv = FALSE
 	if(!refill_canister)
 		circuit = null
@@ -97,6 +102,14 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	last_slogan = world.time + rand(0, slogan_delay)
 	power_change()
 
+	if(mapload) //check if it was initially created off station during mapload.
+		if(!is_station_level(z))
+			onstation = FALSE
+			if(circuit)
+				circuit.onstation = onstation //sync up the circuit so the pricing schema is carried over if it's reconstructed.
+	else if(circuit && (circuit.onstation != onstation)) //check if they're not the same to minimize the amount of edited values.
+		onstation = circuit.onstation //if it was constructed outside mapload, sync the vendor up with the circuit's var so you can't bypass price requirements by moving / reconstructing it off station.
+
 /obj/machinery/vending/Destroy()
 	QDEL_NULL(wires)
 	QDEL_NULL(coin)
@@ -114,6 +127,8 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	GLOB.vending_machine_icon[P.product_path] = copytext(producticon,1,0)
 	return GLOB.vending_machine_icon[P.product_path]
 
+/obj/machinery/vending/can_speak()
+	return !shut_up
 
 /obj/machinery/vending/RefreshParts()         //Better would be to make constructable child
 	if(!component_parts)
@@ -179,6 +194,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 		R.max_amount = amount
 		R.display_color = pick("#ff8080","#80ff80","#8080ff")
 		R.custom_price = initial(temp.custom_price)
+		R.custom_premium_price = initial(temp.custom_premium_price)
 		recordlist += R
 
 /obj/machinery/vending/proc/restock(obj/item/vending_refill/canister)
@@ -308,12 +324,8 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 		if(shock(user, 100))
 			return
 	return ..()
-
-/*Old one.
+/*
 /obj/machinery/vending/ui_interact(mob/user)
-	var/onstation = FALSE
-	if(SSmapping.level_trait(z, ZTRAIT_STATION))
-		onstation = TRUE
 	var/dat = ""
 	var/datum/bank_account/account
 	var/mob/living/carbon/human/H
@@ -347,7 +359,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			if(!onstation || account && account.account_job && account.account_job.paycheck_department == payment_department)
 				price_listed = "FREE"
 			if(coin_records.Find(R) || is_hidden)
-				price_listed = "$[extra_price]"
+				price_listed = "$[R.custom_premium_price ? R.custom_premium_price : extra_price]"
 			dat += "<li>"
 			if(R.amount > 0 && ((C && C.registered_account && onstation) || (!onstation && iscarbon(user))))
 				dat += "<a href='byond://?src=[REF(src)];vend=[REF(R)]'>Vend</a> "
@@ -377,9 +389,6 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 */
 //New one
 /obj/machinery/vending/ui_interact(mob/user)
-	var/onstation = FALSE
-	if(SSmapping.level_trait(z, ZTRAIT_STATION))
-		onstation = TRUE
 	var/dat = ""
 	var/datum/bank_account/account
 	var/mob/living/carbon/human/H
@@ -411,7 +420,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			if(coin_records.Find(R) || is_hidden)
 				price_listed = "$[extra_price]"
 			if(R.custom_price)
-				price_listed = "$[R.custom_price]"
+				price_listed = "$[R.custom_premium_price ? R.custom_premium_price : extra_price]"
 			if(!onstation || account && account.account_job && account.account_job.paycheck_department == payment_department)
 				price_listed = "FREE"
 			dat += "<tr><td><img src='data:image/jpeg;base64,[GetIconForProduct(R)]'/></td>"
@@ -444,9 +453,6 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 /obj/machinery/vending/Topic(href, href_list)
 	if(..())
 		return
-	var/onstation = FALSE
-	if(SSmapping.level_trait(z, ZTRAIT_STATION))
-		onstation = TRUE
 
 	usr.set_machine(src)
 
@@ -536,7 +542,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 			if(account.account_job && account.account_job.paycheck_department == payment_department)
 				price_to_use = 0
 			if(coin_records.Find(R) || hidden_records.Find(R))
-				price_to_use = extra_price
+				price_to_use = R.custom_premium_price ? R.custom_premium_price : extra_price
 			if(price_to_use && !account.adjust_money(-price_to_use))
 				say("You do not possess the funds to purchase [R.name].")
 				flick(icon_deny,src)
@@ -566,7 +572,7 @@ GLOBAL_LIST_EMPTY(vending_machine_icon)
 	if(!active)
 		return
 
-	if(seconds_electrified > 0)
+	if(seconds_electrified > MACHINE_NOT_ELECTRIFIED)
 		seconds_electrified--
 
 	//Pitch to the people!  Really sell it!
