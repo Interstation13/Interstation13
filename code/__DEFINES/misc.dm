@@ -463,3 +463,8 @@ GLOBAL_LIST_INIT(pda_styles, list(MONO, VT, ORBITRON, SHARE))
 #define DICE_NOT_RIGGED 1
 #define DICE_BASICALLY_RIGGED 2
 #define DICE_TOTALLY_RIGGED 3
+
+//Defines of commonly used spans, to make life slightly easier
+#define SPAN_NOTICE(text)  "<span class='notice'>[text]</span>"
+#define SPAN_WARNING(text) "<span class='warning'>[text]</span>"
+#define SPAN_DANGER(text)  "<span class='danger'>[text]</span>"
