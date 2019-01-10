@@ -8,6 +8,7 @@
 	new /obj/item/clothing/suit/hooded/wintercoat/captain(src)
 	new /obj/item/storage/backpack/captain(src)
 	new /obj/item/storage/backpack/satchel/cap(src)
+	new /obj/item/storage/backpack/messenger/com(src)
 	new /obj/item/storage/backpack/duffelbag/captain(src)
 	new /obj/item/clothing/neck/cloak/cap(src)
 	new /obj/item/clothing/neck/petcollar(src)
