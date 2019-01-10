@@ -36,7 +36,7 @@
 	// THESE OVERRIDE THE HIDEHAIR FLAGS
 	var/dynamic_hair_suffix = ""//head > mask for head hair
 	var/dynamic_fhair_suffix = ""//mask > head for facial hair
-	
+
 
 /obj/item/clothing/Initialize()
 	. = ..()
@@ -212,6 +212,12 @@ BLIND     // can't see anything
 		if(H.w_uniform == src)
 			H.update_suit_sensors()
 
+	..()
+
+/obj/item/clothing/under/attack_hand(mob/user)
+	if(attached_accessory && ispath(attached_accessory.pocket_storage_component_path) && loc == user)
+		attached_accessory.attack_hand(user)
+		return
 	..()
 
 /obj/item/clothing/under/AltClick(mob/user)
