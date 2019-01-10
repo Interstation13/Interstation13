@@ -22,6 +22,7 @@ Quartermaster
 	name = "Quartermaster"
 	jobtype = /datum/job/qm
 
+	id = /obj/item/card/id/job/cargo
 	belt = /obj/item/pda/quartermaster
 	ears = /obj/item/radio/headset/headset_cargo
 	uniform = /obj/item/clothing/under/rank/cargo
@@ -56,6 +57,7 @@ Cargo Technician
 	name = "Cargo Technician"
 	jobtype = /datum/job/cargo_tech
 
+	id = /obj/item/card/id/job/cargo
 	belt = /obj/item/pda/cargo
 	ears = /obj/item/radio/headset/headset_cargo
 	uniform = /obj/item/clothing/under/rank/cargotech
@@ -86,6 +88,7 @@ Shaft Miner
 	name = "Shaft Miner"
 	jobtype = /datum/job/mining
 
+	id = /obj/item/card/id/job/cargo
 	belt = /obj/item/pda/shaftminer
 	ears = /obj/item/radio/headset/headset_cargo/mining
 	shoes = /obj/item/clothing/shoes/workboots/mining
