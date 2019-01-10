@@ -419,36 +419,35 @@ GLOBAL_LIST_EMPTY(asset_datums)
 		"smmon_6.gif" 				= 'icons/program_icons/smmon_6.gif'
 	)
 
-/datum/asset/spritesheet/simple/pda
-	name = "pda"
+/datum/asset/simple/pda
 	assets = list(
-		"atmos"			= 'icons/pda_icons/pda_atmos.png',
-		"back"			= 'icons/pda_icons/pda_back.png',
-		"bell"			= 'icons/pda_icons/pda_bell.png',
-		"blank"			= 'icons/pda_icons/pda_blank.png',
-		"boom"			= 'icons/pda_icons/pda_boom.png',
-		"bucket"		= 'icons/pda_icons/pda_bucket.png',
-		"medbot"		= 'icons/pda_icons/pda_medbot.png',
-		"floorbot"		= 'icons/pda_icons/pda_floorbot.png',
-		"cleanbot"		= 'icons/pda_icons/pda_cleanbot.png',
-		"crate"			= 'icons/pda_icons/pda_crate.png',
-		"cuffs"			= 'icons/pda_icons/pda_cuffs.png',
-		"eject"			= 'icons/pda_icons/pda_eject.png',
-		"flashlight"	= 'icons/pda_icons/pda_flashlight.png',
-		"honk"			= 'icons/pda_icons/pda_honk.png',
-		"mail"			= 'icons/pda_icons/pda_mail.png',
-		"medical"		= 'icons/pda_icons/pda_medical.png',
-		"menu"			= 'icons/pda_icons/pda_menu.png',
-		"mule"			= 'icons/pda_icons/pda_mule.png',
-		"notes"			= 'icons/pda_icons/pda_notes.png',
-		"power"			= 'icons/pda_icons/pda_power.png',
-		"rdoor"			= 'icons/pda_icons/pda_rdoor.png',
-		"reagent"		= 'icons/pda_icons/pda_reagent.png',
-		"refresh"		= 'icons/pda_icons/pda_refresh.png',
-		"scanner"		= 'icons/pda_icons/pda_scanner.png',
-		"signaler"		= 'icons/pda_icons/pda_signaler.png',
-		"status"		= 'icons/pda_icons/pda_status.png',
-		"dronephone"	= 'icons/pda_icons/pda_dronephone.png'
+		"pda_atmos.png"			= 'icons/pda_icons/pda_atmos.png',
+		"pda_back.png"			= 'icons/pda_icons/pda_back.png',
+		"pda_bell.png"			= 'icons/pda_icons/pda_bell.png',
+		"pda_blank.png"			= 'icons/pda_icons/pda_blank.png',
+		"pda_boom.png"			= 'icons/pda_icons/pda_boom.png',
+		"pda_bucket.png"		= 'icons/pda_icons/pda_bucket.png',
+		"pda_medbot.png"		= 'icons/pda_icons/pda_medbot.png',
+		"pda_floorbot.png"		= 'icons/pda_icons/pda_floorbot.png',
+		"pda_cleanbot.png"		= 'icons/pda_icons/pda_cleanbot.png',
+		"pda_crate.png"			= 'icons/pda_icons/pda_crate.png',
+		"pda_cuffs.png"			= 'icons/pda_icons/pda_cuffs.png',
+		"pda_eject.png"			= 'icons/pda_icons/pda_eject.png',
+		"pda_flashlight.png"	= 'icons/pda_icons/pda_flashlight.png',
+		"pda_honk.png"			= 'icons/pda_icons/pda_honk.png',
+		"pda_mail.png"			= 'icons/pda_icons/pda_mail.png',
+		"pda_medical.png"		= 'icons/pda_icons/pda_medical.png',
+		"pda_menu.png"			= 'icons/pda_icons/pda_menu.png',
+		"pda_mule.png"			= 'icons/pda_icons/pda_mule.png',
+		"pda_notes.png"			= 'icons/pda_icons/pda_notes.png',
+		"pda_power.png"			= 'icons/pda_icons/pda_power.png',
+		"pda_rdoor.png"			= 'icons/pda_icons/pda_rdoor.png',
+		"pda_reagent.png"		= 'icons/pda_icons/pda_reagent.png',
+		"pda_refresh.png"		= 'icons/pda_icons/pda_refresh.png',
+		"pda_scanner.png"		= 'icons/pda_icons/pda_scanner.png',
+		"pda_signaler.png"		= 'icons/pda_icons/pda_signaler.png',
+		"pda_status.png"		= 'icons/pda_icons/pda_status.png',
+		"pda_dronephone.png"	= 'icons/pda_icons/pda_dronephone.png'
 	)
 
 /datum/asset/spritesheet/simple/paper

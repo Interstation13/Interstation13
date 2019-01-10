@@ -409,3 +409,7 @@ ul.sparse {
     display: inline-block;
     vertical-align: middle;
 }
+
+.pda_icon {
+	vertical-align: -3px;
+}
