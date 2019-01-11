@@ -6,6 +6,9 @@
 	burst_size = 3
 	fire_delay = 2
 	actions_types = list(/datum/action/item_action/toggle_firemode)
+	mag_load_sound = 'sound/weapons/wep_magazines/smg_load.ogg'
+	mag_unload_sound = 'sound/weapons/wep_magazines/smg_unload.ogg'
+	chamber_sound = 'sound/weapons/wep_magazines/smg_chamber.ogg'
 
 /obj/item/gun/ballistic/automatic/proto
 	name = "\improper Nanotrasen Saber SMG"
@@ -231,6 +234,9 @@
 	slot_flags = 0
 	mag_type = /obj/item/ammo_box/magazine/m556
 	fire_sound = 'sound/weapons/gunshot_smg.ogg'
+	mag_load_sound = 'sound/weapons/wep_magazines/ar_load.ogg'
+	mag_unload_sound = 'sound/weapons/wep_magazines/ar_unload.ogg'
+	chamber_sound = 'sound/weapons/wep_magazines/ar_chamber.ogg'
 	can_suppress = FALSE
 	burst_size = 3
 	fire_delay = 1
@@ -246,6 +252,9 @@
 	weapon_weight = WEAPON_MEDIUM
 	mag_type = /obj/item/ammo_box/magazine/m12g
 	fire_sound = 'sound/weapons/shotgunshot.ogg'
+	mag_load_sound = 'sound/weapons/wep_magazines/bulldog_load.ogg'
+	mag_unload_sound = 'sound/weapons/wep_magazines/bulldog_unload.ogg'
+	chamber_sound = 'sound/weapons/wep_magazines/bulldog_chamber.ogg'
 	vary_fire_sound = FALSE
 	fire_sound_volume = 90
 	can_suppress = FALSE
@@ -307,9 +316,9 @@
 	cover_open = !cover_open
 	to_chat(user, "<span class='notice'>You [cover_open ? "open" : "close"] [src]'s cover.</span>")
 	if(cover_open)
-		playsound(user, 'sound/weapons/sawopen.ogg', 60, 1)
+		playsound(user, 'sound/weapons/sawopen.ogg', 50, 1)
 	else
-		playsound(user, 'sound/weapons/sawclose.ogg', 60, 1)
+		playsound(user, 'sound/weapons/sawclose.ogg', 50, 1)
 	update_icon()
 
 
@@ -340,7 +349,7 @@
 		magazine = null
 		update_icon()
 		to_chat(user, "<span class='notice'>You remove the magazine from [src].</span>")
-		playsound(user, 'sound/weapons/magout.ogg', 60, 1)
+		playsound(user, 'sound/weapons/wep_magazines/lmg_unload.ogg', 50, 1)
 
 /obj/item/gun/ballistic/automatic/l6_saw/attackby(obj/item/A, mob/user, params)
 	if(!cover_open && istype(A, mag_type))

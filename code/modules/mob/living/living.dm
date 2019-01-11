@@ -422,6 +422,8 @@
 /mob/living/proc/set_resting(rest, silent = TRUE)
 	if(!silent)
 		if(rest)
+			if(has_gravity())//Resting shouldn't be silent.
+				playsound(src, "bodyfall", 50, 1)
 			to_chat(src, "<span class='notice'>You are now resting.</span>")
 		else
 			to_chat(src, "<span class='notice'>You get up.</span>")
