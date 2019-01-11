@@ -8,6 +8,9 @@
 	var/obj/item/ammo_box/magazine/magazine
 	var/casing_ejector = TRUE //whether the gun ejects the chambered casing
 	var/magazine_wording = "magazine"
+	var/mag_load_sound = 'sound/weapons/wep_magazines/handgun_generic_load.ogg'
+	var/mag_unload_sound = 'sound/weapons/wep_magazines/handgun_generic_unload.ogg'
+	var/chamber_sound = 'sound/weapons/wep_magazines/generic_chamber.ogg'
 
 /obj/item/gun/ballistic/Initialize()
 	. = ..()
@@ -59,13 +62,11 @@
 			if(user.transferItemToLoc(AM, src))
 				magazine = AM
 				to_chat(user, "<span class='notice'>You load a new [magazine_wording] into \the [src].</span>")
+				playsound(src, mag_load_sound, 50, 1)
 				if(magazine.ammo_count())
-					playsound(src, "gun_insert_full_magazine", 70, 1)
 					if(!chambered)
 						chamber_round()
-						addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/weapons/gun_chamber_round.ogg', 100, 1), 3)
-				else
-					playsound(src, "gun_insert_empty_magazine", 70, 1)
+						addtimer(CALLBACK(GLOBAL_PROC, .proc/playsound, src, 'sound/weapons/gun_chamber_round.ogg', 50, 1), 3)
 				A.update_icon()
 				update_icon()
 				return 1
@@ -98,8 +99,9 @@
 	update_icon()
 
 //ATTACK HAND IGNORING PARENT RETURN VALUE
-///obj/item/gun/ballistic/attack_hand(mob/user)
-
+/obj/item/gun/ballistic/attack_hand(mob/user)
+	remove_surpressor(user)
+	return ..()
 
 /obj/item/gun/ballistic/proc/remove_surpressor(mob/user)
 	if(loc == user)
@@ -112,12 +114,22 @@
 			w_class -= S.w_class
 			suppressed = null
 			update_icon()
-			return
-	return ..()
+			
 
 /obj/item/gun/ballistic/attack_self(mob/user)
-	remove_surpressor(user)
-	return
+	unload_round(user)
+	
+
+/obj/item/gun/ballistic/proc/unload_round(mob/user)
+	var/obj/item/ammo_casing/AC = chambered //Find chambered round
+	if(chambered && !magazine)
+		AC.forceMove(drop_location())
+		AC.bounce_away()
+		chambered = null
+		to_chat(user, "<span class='notice'>You unload the round from \the [src]'s chamber.</span>")
+		playsound(src, chamber_sound, 50, 1)
+		update_icon()
+	
 
 /obj/item/gun/ballistic/proc/unload_ammo(mob/living/user)
 	if(istype(src,/obj/item/gun/ballistic/revolver))//Fuck internal magazines tbh fam.
@@ -125,23 +137,18 @@
 	if(istype(src,/obj/item/gun/ballistic/shotgun))
 		return
 
-	var/obj/item/ammo_casing/AC = chambered //Find chambered round
+	//var/obj/item/ammo_casing/AC = chambered //Find chambered round
 	if(magazine)
 		magazine.forceMove(drop_location())
 		user.put_in_hands(magazine)
 		magazine.update_icon()
-		if(magazine.ammo_count())
-			playsound(src, 'sound/weapons/gun_magazine_remove_full.ogg', 70, 1)
-		else
-			playsound(src, "gun_remove_empty_magazine", 70, 1)
+		//if(magazine.ammo_count())
+		//	playsound(src, 'sound/weapons/gun_magazine_remove_full.ogg', 70, 1)
+		//else
+		//	playsound(src, "gun_remove_empty_magazine", 70, 1)
+		playsound(src, mag_unload_sound, 50, 1)
 		magazine = null
 		to_chat(user, "<span class='notice'>You pull the magazine out of \the [src].</span>")
-	else if(chambered)
-		AC.forceMove(drop_location())
-		AC.bounce_away()
-		chambered = null
-		to_chat(user, "<span class='notice'>You unload the round from \the [src]'s chamber.</span>")
-		playsound(src, "gun_slide_lock", 70, 1)
 	else
 		to_chat(user, "<span class='notice'>There's no magazine in \the [src].</span>")
 	update_icon()
