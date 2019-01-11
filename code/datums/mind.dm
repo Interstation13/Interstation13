@@ -64,6 +64,8 @@
 
 	var/force_escaped = FALSE  // Set by Into The Sunset command of the shuttle manipulator
 
+	var/list/crew_objectives
+
 /datum/mind/New(var/key)
 	src.key = key
 	soulOwner = src
