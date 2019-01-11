@@ -177,7 +177,7 @@
 		hatchstate = 1
 		update_icon()
 		playsound(loc, hatch_open_sound, 40, 1, -1)
-		addtimer(CALLBACK(src, .proc/close_hatch), 20, TIMER_OVERRIDE) //hatch stays open for 2 seconds
+		addtimer(CALLBACK(src, .proc/close_hatch), 20, TIMER_OVERRIDE|TIMER_UNIQUE) //hatch stays open for 2 seconds
 
 	if(istype(mover, /mob/living/simple_animal/drone))
 		var/mob/living/simple_animal/drone/D = mover
@@ -512,7 +512,7 @@
 					lights_overlay = get_airlock_overlay("lights_emergency", overlays_file)
 			if(note)
 				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
-			if(has_hatch)
+			if(has_hatch && hatch_image)
 				if(hatchstate)
 					hatch_image.icon_state = "hatch_open"
 				else
@@ -541,7 +541,7 @@
 			lights_overlay = get_airlock_overlay("lights_denied", overlays_file)
 			if(note)
 				note_overlay = get_airlock_overlay(notetype, note_overlay_file)
-			if(has_hatch)
+			if(has_hatch && hatch_image)
 				if(hatchstate)
 					hatch_image.icon_state = "hatch_open"
 				else
