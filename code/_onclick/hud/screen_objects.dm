@@ -390,6 +390,7 @@
 	name = "rest"
 	icon = 'icons/mob/screen_midnight.dmi'
 	icon_state = "act_rest"
+	screen_loc = ui_lay
 	layer = HUD_LAYER
 	plane = HUD_PLANE
 
