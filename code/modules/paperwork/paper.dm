@@ -406,7 +406,7 @@
 
 //Evil faxes
 /obj/item/paper/evilfax
-	name = "Centcomm Reply"
+	name = "CentCom Reply"
 	info = ""
 	var/mytarget = null
 	var/myeffect = null
