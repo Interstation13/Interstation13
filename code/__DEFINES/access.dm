@@ -58,6 +58,8 @@
 #define ACCESS_WEAPONS 66 //Weapon authorization for secbots
 #define ACCESS_NETWORK 67 //NTnet diagnostics/monitoring software
 #define ACCESS_CLONING 68 //Cloning room and clone pod ejection
+#define ACCESS_ENTER_GENPOP 71 //Enter genpop
+#define ACCESS_LEAVE_GENPOP 72 //Leave genpop
 
 	//BEGIN CENTCOM ACCESS
 	/*Should leave plenty of room if we need to add more access levels.
