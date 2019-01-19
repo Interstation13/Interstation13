@@ -14592,7 +14592,7 @@
 /obj/structure/sign/plaques/golden{
 	pixel_y = 32
 	},
-/obj/item/clothing/accessory/lawyers_badge{
+/obj/item/clothing/accessory/iaas_badge{
 	desc = "A badge of upmost glory.";
 	name = "thunderdome badge"
 	},

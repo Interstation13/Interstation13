@@ -7717,7 +7717,7 @@
 	department = "Law office";
 	pixel_x = -32
 	},
-/obj/machinery/vending/wardrobe/law_wardrobe,
+/obj/machinery/vending/wardrobe/iaa_wardrobe,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden{
 	dir = 6
 	},
@@ -8166,7 +8166,7 @@
 /area/crew_quarters/dorms)
 "asn" = (
 /obj/structure/chair/office/dark,
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden,
 /turf/open/floor/wood,
 /area/lawoffice)
@@ -8821,7 +8821,7 @@
 "auh" = (
 /obj/structure/table/wood,
 /obj/item/taperecorder,
-/obj/item/cartridge/lawyer,
+/obj/item/cartridge/iaa,
 /turf/open/floor/wood,
 /area/lawoffice)
 "aui" = (
@@ -51905,7 +51905,7 @@
 /obj/structure/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /turf/open/floor/wood,
 /area/lawoffice)
 "cxn" = (

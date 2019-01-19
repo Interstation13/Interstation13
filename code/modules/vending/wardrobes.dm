@@ -273,27 +273,27 @@
 /obj/item/vending_refill/wardrobe/jani_wardrobe
 	machine_name = "JaniDrobe"
 
-/obj/machinery/vending/wardrobe/law_wardrobe
-	name = "LawDrobe"
-	desc = "Objection! This wardrobe dispenses the rule of law... and lawyer clothing."
+/obj/machinery/vending/wardrobe/iaa_wardrobe
+	name = "IAADrobe"
+	desc = "Objection! This wardrobe dispenses the rule of law... and Internal Affairs Agent clothing."
 	icon_state = "lawdrobe"
 	product_ads = "OBJECTION! Get the rule of law for yourself!"
-	vend_reply = "Thank you for using the LawDrobe!"
-	products = list(/obj/item/clothing/under/lawyer/female = 1,
-					/obj/item/clothing/under/lawyer/black = 1,
-					/obj/item/clothing/under/lawyer/red = 1,
-					/obj/item/clothing/under/lawyer/bluesuit = 1,
-					/obj/item/clothing/suit/toggle/lawyer = 1,
-					/obj/item/clothing/under/lawyer/purpsuit = 1,
-					/obj/item/clothing/suit/toggle/lawyer/purple = 1,
-					/obj/item/clothing/under/lawyer/blacksuit = 1,
-					/obj/item/clothing/suit/toggle/lawyer/black = 1,
+	vend_reply = "Thank you for using the IAADrobe!"
+	products = list(/obj/item/clothing/under/iaa/female = 1,
+					/obj/item/clothing/under/iaa/black = 1,
+					/obj/item/clothing/under/iaa/red = 1,
+					/obj/item/clothing/under/iaa/bluesuit = 1,
+					/obj/item/clothing/suit/toggle/iaa = 1,
+					/obj/item/clothing/under/iaa/purpsuit = 1,
+					/obj/item/clothing/suit/toggle/iaa/purple = 1,
+					/obj/item/clothing/under/iaa/blacksuit = 1,
+					/obj/item/clothing/suit/toggle/iaa/black = 1,
 					/obj/item/clothing/shoes/laceup = 2,
-					/obj/item/clothing/accessory/lawyers_badge = 2)
-	refill_canister = /obj/item/vending_refill/wardrobe/law_wardrobe
+					/obj/item/clothing/accessory/iaas_badge = 2)
+	refill_canister = /obj/item/vending_refill/wardrobe/iaa_wardrobe
 	payment_department = ACCOUNT_CIV
-/obj/item/vending_refill/wardrobe/law_wardrobe
-	machine_name = "LawDrobe"
+/obj/item/vending_refill/wardrobe/iaa_wardrobe
+	machine_name = "IAADrobe"
 
 /obj/machinery/vending/wardrobe/chap_wardrobe
 	name = "ChapDrobe"

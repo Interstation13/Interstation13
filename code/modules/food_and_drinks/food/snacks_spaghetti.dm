@@ -67,7 +67,7 @@
 
 /obj/item/reagent_containers/food/snacks/spaghetti/spesslaw
 	name = "spesslaw"
-	desc = "A lawyers favourite."
+	desc = "A lawyer's favourite."
 	icon_state = "spesslaw"
 	trash = /obj/item/trash/plate
 	bonus_reagents = list("nutriment" = 1, "vitamin" = 6)

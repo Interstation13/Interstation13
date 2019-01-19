@@ -168,7 +168,7 @@ GLOBAL_VAR(antag_prototypes)
 		if(pref_source.job_rank)
 			antag_header_parts += pref_source.enabled_in_preferences(src) ? "Enabled in Prefs" : "Disabled in Prefs"
 
-		//Traitor : None | Traitor | IAA
+		//Traitor : None | Traitor | Sleeper Agent
 		//	Command1 | Command2 | Command3
 		//	Secret Word : Banana
 		//	Objectives:
