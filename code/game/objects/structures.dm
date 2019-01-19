@@ -4,7 +4,6 @@
 	max_integrity = 300
 	interaction_flags_atom = INTERACT_ATOM_ATTACK_HAND | INTERACT_ATOM_UI_INTERACT
 	var/climb_time = 20
-	var/climb_stun = 20
 	var/climbable = FALSE
 	var/mob/living/structureclimber
 	var/broken = 0 //similar to machinery's stat BROKEN
@@ -81,8 +80,6 @@
 				user.visible_message("<span class='warning'>[user] climbs onto [src].</span>", \
 									"<span class='notice'>You climb onto [src].</span>")
 				log_combat(user, src, "climbed onto")
-				if(climb_stun)
-					user.Stun(climb_stun)
 				. = 1
 			else
 				to_chat(user, "<span class='warning'>You fail to climb onto [src].</span>")
