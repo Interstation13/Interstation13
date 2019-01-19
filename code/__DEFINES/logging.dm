@@ -33,11 +33,12 @@
 #define LOG_GAME		(1 << 12)
 #define LOG_ADMIN_PRIVATE (1 << 13)
 #define LOG_ASAY		(1 << 14)
-#define LOG_MECHA (1 << 15)
+#define LOG_MECHA 		(1 << 15)
+#define LOG_LOOC 		(1 << 16)
 
 //Individual logging panel pages
 #define INDIVIDUAL_ATTACK_LOG		(LOG_ATTACK)
-#define INDIVIDUAL_SAY_LOG			(LOG_SAY | LOG_WHISPER | LOG_DSAY)
+#define INDIVIDUAL_SAY_LOG			(LOG_SAY | LOG_WHISPER | LOG_DSAY | LOG_LOOC)
 #define INDIVIDUAL_EMOTE_LOG		(LOG_EMOTE)
 #define INDIVIDUAL_COMMS_LOG		(LOG_PDA | LOG_CHAT | LOG_COMMENT | LOG_TELECOMMS)
 #define INDIVIDUAL_OOC_LOG			(LOG_OOC | LOG_ADMIN)
