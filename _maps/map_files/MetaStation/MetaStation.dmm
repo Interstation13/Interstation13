@@ -13947,10 +13947,10 @@
 	pixel_y = 28
 	},
 /obj/item/clothing/accessory/waistcoat,
-/obj/item/clothing/suit/toggle/lawyer/black,
+/obj/item/clothing/suit/toggle/iaa/black,
 /obj/item/clothing/under/suit_jacket/red,
 /obj/item/clothing/neck/tie/black,
-/obj/item/clothing/under/lawyer/blacksuit,
+/obj/item/clothing/under/iaa/blacksuit,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},
@@ -18987,7 +18987,7 @@
 /turf/open/floor/plasteel/dark,
 /area/security/courtroom)
 "aKf" = (
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/structure/chair/office/dark{
 	dir = 4
 	},
@@ -19625,7 +19625,7 @@
 /turf/open/floor/plasteel,
 /area/security/courtroom)
 "aLB" = (
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /turf/open/floor/plasteel,
 /area/security/courtroom)
 "aLC" = (
@@ -20179,7 +20179,7 @@
 /turf/open/floor/wood,
 /area/lawoffice)
 "aMS" = (
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/machinery/atmospherics/pipe/simple/scrubbers/hidden{
 	dir = 10
 	},
@@ -20906,7 +20906,7 @@
 	},
 /obj/item/pen,
 /obj/item/taperecorder,
-/obj/item/cartridge/lawyer,
+/obj/item/cartridge/iaa,
 /turf/open/floor/wood,
 /area/lawoffice)
 "aOo" = (
@@ -20936,7 +20936,7 @@
 /obj/machinery/light_switch{
 	pixel_y = -28
 	},
-/obj/machinery/vending/wardrobe/law_wardrobe,
+/obj/machinery/vending/wardrobe/iaa_wardrobe,
 /turf/open/floor/wood,
 /area/lawoffice)
 "aOs" = (

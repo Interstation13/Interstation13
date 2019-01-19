@@ -1961,7 +1961,7 @@
 /turf/open/floor/plating,
 /area/security/checkpoint)
 "aeR" = (
-/obj/machinery/vending/wardrobe/law_wardrobe,
+/obj/machinery/vending/wardrobe/iaa_wardrobe,
 /turf/open/floor/wood,
 /area/lawoffice)
 "aeS" = (
@@ -9130,7 +9130,7 @@
 /obj/structure/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /turf/open/floor/wood,
 /area/lawoffice)
 "atJ" = (
@@ -36411,7 +36411,7 @@
 "btM" = (
 /obj/structure/table/wood,
 /obj/item/taperecorder,
-/obj/item/cartridge/lawyer,
+/obj/item/cartridge/iaa,
 /obj/machinery/requests_console{
 	department = "Law office";
 	pixel_x = -32
@@ -36438,7 +36438,7 @@
 /obj/structure/chair/office/dark{
 	dir = 8
 	},
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/machinery/atmospherics/pipe/simple/supply/hidden,
 /turf/open/floor/wood,
 /area/lawoffice)
@@ -49570,7 +49570,7 @@
 /area/crew_quarters/kitchen)
 "bRz" = (
 /obj/structure/table/wood,
-/obj/item/toy/figure/lawyer,
+/obj/item/toy/figure/iaa,
 /turf/open/floor/plasteel,
 /area/security/courtroom)
 "bRA" = (

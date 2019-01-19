@@ -1840,12 +1840,12 @@
 	contains = list(/obj/item/clothing/under/blacktango,
 					/obj/item/clothing/under/assistantformal,
 					/obj/item/clothing/under/assistantformal,
-					/obj/item/clothing/under/lawyer/bluesuit,
-					/obj/item/clothing/suit/toggle/lawyer,
-					/obj/item/clothing/under/lawyer/purpsuit,
-					/obj/item/clothing/suit/toggle/lawyer/purple,
-					/obj/item/clothing/under/lawyer/blacksuit,
-					/obj/item/clothing/suit/toggle/lawyer/black,
+					/obj/item/clothing/under/iaa/bluesuit,
+					/obj/item/clothing/suit/toggle/iaa,
+					/obj/item/clothing/under/iaa/purpsuit,
+					/obj/item/clothing/suit/toggle/iaa/purple,
+					/obj/item/clothing/under/iaa/blacksuit,
+					/obj/item/clothing/suit/toggle/iaa/black,
 					/obj/item/clothing/accessory/waistcoat,
 					/obj/item/clothing/neck/tie/blue,
 					/obj/item/clothing/neck/tie/red,
@@ -2046,10 +2046,10 @@
 
 /datum/supply_pack/costumes_toys/wardrobes/security
 	name = "Security Wardrobe Supply Crate"
-	desc = "This crate contains refills for the SecDrobe and LawDrobe."
+	desc = "This crate contains refills for the SecDrobe and IAADrobe."
 	cost = 1500
 	contains = list(/obj/item/vending_refill/wardrobe/sec_wardrobe,
-					/obj/item/vending_refill/wardrobe/law_wardrobe)
+					/obj/item/vending_refill/wardrobe/iaa_wardrobe)
 	crate_name = "security department supply crate"
 
 //////////////////////////////////////////////////////////////////////////////

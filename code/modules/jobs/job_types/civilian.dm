@@ -162,51 +162,41 @@ Curator
 /*
 Lawyer
 */
-/datum/job/lawyer
-	title = "Lawyer"
-	flag = LAWYER
-	department_head = list("Head of Personnel")
+/datum/job/iaa
+	title = "Internal Affairs Agent"
+	flag = IAA
+	department_head = list("CentCom")
 	department_flag = CIVILIAN
 	faction = "Station"
 	total_positions = 2
 	spawn_positions = 2
-	supervisors = "the head of personnel"
+	supervisors = "central command"
 	selection_color = "#dddddd"
-	var/lawyers = 0 //Counts lawyer amount
 
-	outfit = /datum/outfit/job/lawyer
+	outfit = /datum/outfit/job/iaa
 
-	access = list(ACCESS_LAWYER, ACCESS_COURT, ACCESS_SEC_DOORS)
-	minimal_access = list(ACCESS_LAWYER, ACCESS_COURT, ACCESS_SEC_DOORS)
-	paycheck = PAYCHECK_EASY
+	access = list(ACCESS_IAA, ACCESS_COURT, ACCESS_SEC_DOORS, ACCESS_IAA, ACCESS_MAINT_TUNNELS, ACCESS_RESEARCH, ACCESS_MEDICAL, ACCESS_CONSTRUCTION, ACCESS_CARGO)
+	minimal_access = list(ACCESS_IAA, ACCESS_COURT, ACCESS_SEC_DOORS, ACCESS_IAA, ACCESS_MAINT_TUNNELS, ACCESS_RESEARCH, ACCESS_MEDICAL, ACCESS_CONSTRUCTION, ACCESS_CARGO)
+	paycheck = PAYCHECK_HARD
 	paycheck_department = ACCOUNT_CIV
 	mind_traits = list(TRAIT_LAW_ENFORCEMENT_METABOLISM)
 
 
-/datum/outfit/job/lawyer
-	name = "Lawyer"
-	jobtype = /datum/job/lawyer
+/datum/outfit/job/iaa
+	name = "Internal Affairs Agent"
+	jobtype = /datum/job/iaa
 
 	id = /obj/item/card/id/job/sec
-	belt = /obj/item/pda/lawyer
+	belt = /obj/item/pda/iaa
 	ears = /obj/item/radio/headset/headset_sec
-	uniform = /obj/item/clothing/under/lawyer/bluesuit
-	suit = /obj/item/clothing/suit/toggle/lawyer
+	uniform = /obj/item/clothing/under/iaa/bluesuit
+	suit = /obj/item/clothing/suit/toggle/iaa
 	shoes = /obj/item/clothing/shoes/laceup
-	l_hand = /obj/item/storage/briefcase/lawyer
-	l_pocket = /obj/item/laser_pointer
-	r_pocket = /obj/item/clothing/accessory/lawyers_badge
+	l_hand = /obj/item/storage/briefcase/iaa
+	l_pocket = /obj/item/assembly/flash/handheld
+
+	glasses = /obj/item/clothing/glasses/sunglasses
+
+	implants = list(/obj/item/implant/mindshield)
 
 	chameleon_extras = /obj/item/stamp/law
-
-
-/datum/outfit/job/lawyer/pre_equip(mob/living/carbon/human/H, visualsOnly = FALSE)
-	..()
-	if(visualsOnly)
-		return
-
-	var/datum/job/lawyer/J = SSjob.GetJobType(jobtype)
-	J.lawyers++
-	if(J.lawyers>1)
-		uniform = /obj/item/clothing/under/lawyer/purpsuit
-		suit = /obj/item/clothing/suit/toggle/lawyer/purple

@@ -287,7 +287,7 @@
 
 /datum/objective/crew/justicecrew
 	explanation_text = "Ensure there are no members of security in the prison wing when the shift ends."
-	jobs = "lawyer"
+	jobs = "internal affairs agent"
 
 /datum/objective/crew/justicecrew/check_completion()
 	if(owner && owner.current)

@@ -237,7 +237,7 @@
 		/obj/machinery/vending/wardrobe/bar_wardrobe = "BarDrobe",
 		/obj/machinery/vending/wardrobe/chef_wardrobe = "ChefDrobe",
 		/obj/machinery/vending/wardrobe/jani_wardrobe = "JaniDrobe",
-		/obj/machinery/vending/wardrobe/law_wardrobe = "LawDrobe",
+		/obj/machinery/vending/wardrobe/iaa_wardrobe = "IAADrobe",
 		/obj/machinery/vending/wardrobe/chap_wardrobe = "ChapDrobe",
 		/obj/machinery/vending/wardrobe/chem_wardrobe = "ChemDrobe",
 		/obj/machinery/vending/wardrobe/gene_wardrobe = "GeneDrobe",

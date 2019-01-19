@@ -63619,7 +63619,7 @@
 "cdh" = (
 /obj/structure/table/wood,
 /obj/item/clipboard,
-/obj/item/toy/figure/lawyer,
+/obj/item/toy/figure/iaa,
 /turf/open/floor/wood,
 /area/lawoffice)
 "cdi" = (
@@ -63638,7 +63638,7 @@
 /turf/open/floor/wood,
 /area/lawoffice)
 "cdk" = (
-/obj/machinery/vending/wardrobe/law_wardrobe,
+/obj/machinery/vending/wardrobe/iaa_wardrobe,
 /obj/machinery/firealarm{
 	dir = 8;
 	pixel_x = 24
@@ -64905,7 +64905,7 @@
 /obj/structure/cable/white{
 	icon_state = "2-8"
 	},
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/machinery/atmospherics/pipe/manifold/supply/hidden{
 	dir = 4
 	},
@@ -67085,7 +67085,7 @@
 	pixel_x = -26;
 	pixel_y = 3
 	},
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/machinery/atmospherics/components/unary/vent_scrubber/on{
 	dir = 1
 	},
@@ -68025,7 +68025,7 @@
 /area/security/courtroom)
 "cjZ" = (
 /obj/machinery/holopad,
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /obj/effect/turf_decal/bot,
 /turf/open/floor/plasteel,
 /area/security/courtroom)
@@ -78627,7 +78627,7 @@
 "cCg" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/suit/jacket/letterman_nanotrasen,
-/obj/item/clothing/suit/toggle/lawyer,
+/obj/item/clothing/suit/toggle/iaa,
 /obj/item/radio/intercom{
 	pixel_x = 26;
 	pixel_y = 26
@@ -78661,7 +78661,7 @@
 	icon_state = "detective";
 	name = "trenchcoat"
 	},
-/obj/item/clothing/suit/toggle/lawyer/purple,
+/obj/item/clothing/suit/toggle/iaa/purple,
 /obj/item/radio/intercom{
 	pixel_x = 26;
 	pixel_y = 26
@@ -89773,7 +89773,7 @@
 "cUW" = (
 /obj/structure/closet/secure_closet/personal/cabinet,
 /obj/item/clothing/suit/jacket/letterman_nanotrasen,
-/obj/item/clothing/suit/toggle/lawyer,
+/obj/item/clothing/suit/toggle/iaa,
 /obj/item/clothing/under/maid,
 /obj/item/clothing/head/kitty,
 /obj/machinery/airalarm{
@@ -89798,11 +89798,11 @@
 	icon_state = "detective";
 	name = "trenchcoat"
 	},
-/obj/item/clothing/suit/toggle/lawyer/purple,
+/obj/item/clothing/suit/toggle/iaa/purple,
 /obj/item/clothing/head/fedora{
 	icon_state = "detective"
 	},
-/obj/item/clothing/under/lawyer/female,
+/obj/item/clothing/under/iaa/female,
 /obj/machinery/airalarm{
 	dir = 1;
 	pixel_y = -22
@@ -89821,7 +89821,7 @@
 	icon_state = "greydet";
 	name = "trenchcoat"
 	},
-/obj/item/clothing/suit/toggle/lawyer/black,
+/obj/item/clothing/suit/toggle/iaa/black,
 /obj/machinery/status_display/evac{
 	pixel_y = -32
 	},

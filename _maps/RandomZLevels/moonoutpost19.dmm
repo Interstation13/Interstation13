@@ -6734,7 +6734,7 @@
 /obj/structure/table,
 /obj/structure/bedsheetbin,
 /obj/item/clothing/neck/tie/black,
-/obj/item/clothing/under/lawyer/blacksuit,
+/obj/item/clothing/under/iaa/blacksuit,
 /obj/effect/turf_decal/tile/blue{
 	dir = 4
 	},

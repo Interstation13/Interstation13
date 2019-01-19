@@ -23,7 +23,7 @@
 	item_color = "qm"
 
 /obj/item/stamp/law
-	name = "law office's rubber stamp"
+	name = "internal affairs agent's rubber stamp"
 	icon_state = "stamp-law"
 	item_color = "cargo"
 

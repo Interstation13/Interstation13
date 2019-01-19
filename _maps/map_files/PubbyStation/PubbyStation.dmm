@@ -11693,7 +11693,7 @@
 /turf/open/floor/wood,
 /area/lawoffice)
 "aCf" = (
-/obj/machinery/vending/wardrobe/law_wardrobe,
+/obj/machinery/vending/wardrobe/iaa_wardrobe,
 /turf/open/floor/wood,
 /area/lawoffice)
 "aCg" = (
@@ -14566,7 +14566,7 @@
 /area/maintenance/department/cargo)
 "aIq" = (
 /obj/structure/closet/crate/coffin,
-/obj/item/toy/figure/lawyer,
+/obj/item/toy/figure/iaa,
 /obj/effect/decal/cleanable/cobweb/cobweb2,
 /turf/open/floor/plating,
 /area/maintenance/department/cargo)
@@ -57043,7 +57043,7 @@
 /area/space/nearstation)
 "mXq" = (
 /obj/item/taperecorder,
-/obj/item/cartridge/lawyer,
+/obj/item/cartridge/iaa,
 /obj/structure/table/wood,
 /turf/open/floor/wood,
 /area/lawoffice)
@@ -57712,7 +57712,7 @@
 /obj/structure/chair/office/dark{
 	dir = 1
 	},
-/obj/effect/landmark/start/lawyer,
+/obj/effect/landmark/start/iaa,
 /turf/open/floor/carpet,
 /area/lawoffice)
 "oCX" = (
