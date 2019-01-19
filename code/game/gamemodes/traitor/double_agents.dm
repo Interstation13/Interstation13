@@ -2,29 +2,29 @@
 	var/list/target_list = list()
 	var/list/late_joining_list = list()
 
-/datum/game_mode/traitor/internal_affairs
-	name = "Internal Affairs"
-	config_tag = "internal_affairs"
-	report_type = "internal_affairs"
+/datum/game_mode/traitor/sleeper_agents
+	name = "Sleeper Agents"
+	config_tag = "sleeper_agents"
+	report_type = "sleeper_agents"
 	false_report_weight = 10
 	required_players = 25
 	required_enemies = 5
 	recommended_enemies = 8
 	reroll_friendly = 0
-	traitor_name = "Nanotrasen Internal Affairs Agent"
-	antag_flag = ROLE_INTERNAL_AFFAIRS
+	traitor_name = "Nanotrasen Sleeper Agent"
+	antag_flag = ROLE_SLEEPER_AGENTS
 
 	traitors_possible = 10 //hard limit on traitors if scaling is turned off
 	num_modifier = 4 // Four additional traitors
-	antag_datum = /datum/antagonist/traitor/internal_affairs
+	antag_datum = /datum/antagonist/traitor/sleeper_agent
 
-	announce_text = "There are Nanotrasen Internal Affairs Agents trying to kill each other!\n\
-	<span class='danger'>IAA</span>: Eliminate your targets and protect yourself!\n\
-	<span class='notice'>Crew</span>: Stop the IAA agents before they can cause too much mayhem."
+	announce_text = "There are Nanotrasen Sleeper Agents trying to kill each other!\n\
+	<span class='danger'>Sleeper Agents</span>: Eliminate your targets and protect yourself!\n\
+	<span class='notice'>Crew</span>: Stop the Sleeper Agents before they can cause too much mayhem."
 
 
 
-/datum/game_mode/traitor/internal_affairs/post_setup()
+/datum/game_mode/traitor/sleeper_agents/post_setup()
 	var/i = 0
 	for(var/datum/mind/traitor in pre_traitors)
 		i++
@@ -34,7 +34,7 @@
 	..()
 
 
-/datum/game_mode/traitor/internal_affairs/add_latejoin_traitor(datum/mind/character)
+/datum/game_mode/traitor/sleeper_agents/add_latejoin_traitor(datum/mind/character)
 
 	check_potential_agents()
 
@@ -63,7 +63,7 @@
 		late_joining_list += character
 	return
 
-/datum/game_mode/traitor/internal_affairs/proc/check_potential_agents()
+/datum/game_mode/traitor/sleeper_agents/proc/check_potential_agents()
 
 	for(var/M in late_joining_list)
 		if(istype(M, /datum/mind))
@@ -78,6 +78,6 @@
 		late_joining_list -= M
 
 
-/datum/game_mode/traitor/internal_affairs/generate_report()
-	return "Nanotrasen denies any accusations of placing internal affairs agents onboard your station to eliminate inconvenient employees.  Any further accusations against CentCom for such \
+/datum/game_mode/traitor/sleeper_agents/generate_report()
+	return "Nanotrasen denies any accusations of placing sleeper agents onboard your station to eliminate inconvenient employees.  Any further accusations against CentCom for such \
 			actions will be met with a conversation with an official internal affairs agent."
