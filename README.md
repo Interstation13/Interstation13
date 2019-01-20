@@ -1,4 +1,4 @@
-## Interstations codebase
+## Interstation codebase
 
 [![Build Status](https://travis-ci.org/Interstation13/Interstation13.svg?branch=master)](https://travis-ci.org/Interstation13/Interstation13)
 [![Percentage of issues still open](http://isitmaintained.com/badge/open/interstation13/interstation13.svg)](http://isitmaintained.com/project/interstation13/interstation13 "Percentage of issues still open") [![Average time to resolve an issue](http://isitmaintained.com/badge/resolution/interstation13/interstation13.svg)](http://isitmaintained.com/project/interstation13/interstation13 "Average time to resolve an issue") ![Coverage](https://img.shields.io/badge/coverage---2%25-red.svg)  
@@ -110,7 +110,7 @@ Anytime you want to make changes to a map it's imperative you use the [Map Mergi
 
 ## AWAY MISSIONS
 
-Interstations supports loading away missions however they are disabled by default.
+Interstation supports loading away missions however they are disabled by default.
 
 Map files for away missions are located in the _maps/RandomZLevels directory. Each away mission includes it's own code definitions located in /code/modules/awaymissions/mission_code. These files must be included and compiled with the server beforehand otherwise the server will crash upon trying to load away missions that lack their code.
 
