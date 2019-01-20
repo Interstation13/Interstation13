@@ -86,8 +86,8 @@ the new version.
 
 ## HOSTING
 
-If you'd like a more robust server hosting option for interstation and its
-derivatives. Check out our server tools suite at 
+If you'd like a more robust server hosting option for tgstation and its
+derivatives. Check out their server tools suite at 
 https://github.com/tgstation/tgstation-server
 
 ## MAPS
