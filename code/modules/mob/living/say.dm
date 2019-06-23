@@ -280,7 +280,7 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	var/image/I = image('icons/mob/talk.dmi', src, "[bubble_type][say_test(message)]", FLY_LAYER)
 	I.appearance_flags = APPEARANCE_UI_IGNORE_ALPHA
 	INVOKE_ASYNC(GLOBAL_PROC, /.proc/animate_speechbubble, I, speech_bubble_recipients, 30)
-
+	
 /proc/animate_speechbubble(image/I, list/show_to, duration)
 	var/matrix/M = matrix()
 	M.Scale(0,0)
@@ -289,11 +289,12 @@ GLOBAL_LIST_INIT(department_radio_keys, list(
 	for(var/client/C in show_to)
 		C.images += I
 	animate(I, transform = 0, alpha = 255, time = 5, easing = ELASTIC_EASING)
-	addtimer(CALLBACK(GLOBAL_PROC, /proc/easein_speechbubble, I, show_to), duration-5, TIMER_CLIENT_TIME)
+	spawn(duration-5)
+		animate(I, alpha = 0, time = 5, easing = EASE_IN)
+		spawn(5)
+			for(var/client/C in show_to)
+				C.images -= I
 
-/proc/easein_speechbubble(image/I, list/show_to)
-	animate(I, alpha = 0, time = 5, easing = EASE_IN)
-	addtimer(CALLBACK(GLOBAL_PROC, /proc/remove_images_from_clients, I, show_to), 5, TIMER_CLIENT_TIME)
 
 /mob/proc/binarycheck()
 	return FALSE
